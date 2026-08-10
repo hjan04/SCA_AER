@@ -1,0 +1,17 @@
+# Simulation results
+xcelium.d/
+*.log
+*.history
+*.key
+*.vcd
+*.fsdb
+*.shm
+
+# Synthesis / P&R generated files
+results/
+*.rpt
+
+# Temporary files
+*.swp
+*~
+.DS_Store
