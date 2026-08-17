@@ -31,8 +31,16 @@ Stage 3 traffic-adaptive sparse/dense block bitmap AER is implemented:
 - directed self-checking adaptive simulation,
 - preliminary Stage 2 trace replay and threshold sweep.
 
-Final equal-bandwidth baseline-vs-adaptive claims are intentionally deferred
-until Stage 4 adds a common fixed-width physical output link or serializer.
+Stage 4 physical-link normalization is implemented:
+
+- common fixed-width valid/ready serializer and deserializer,
+- baseline and adaptive link wrappers,
+- receiver-side canonical event reconstruction,
+- equal physical-link benchmark CSV and plots,
+- threshold, backpressure, and link-width diagnostic sweeps.
+
+Stage 4 is still RTL simulation only. Cadence Genus area, power, and timing are
+deferred to Stage 5.
 
 ## Quick Start
 
@@ -87,6 +95,26 @@ a fresh clone, run the Stage 2 sweep first. The Stage 3 sweep regenerates
 per-run adaptive results under `results/csv/runs/stage3/` and the tracked
 summary `results/csv/adaptive_stage3_summary.csv`.
 
+Run the Stage 4 physical-link directed regression:
+
+```bash
+scripts/run_link_sim.sh
+```
+
+Run the full Stage 4 equal-bandwidth comparison sweep:
+
+```bash
+scripts/sweep_stage4.py --preset stage4
+```
+
+Regenerate only the Stage 4 summary, plots, and analysis from the last manifest:
+
+```bash
+scripts/summarize_stage4_results.py \
+  --manifest results/csv/stage4_manifest.txt \
+  --output-csv results/csv/stage4_summary.csv
+```
+
 Generated traces, logs, waveforms, simulator binaries, and per-run result files
 are ignored by Git because they are reproducible from these scripts. The compact
 summary CSVs and analysis documents are tracked.
@@ -99,6 +127,8 @@ summary CSVs and analysis documents are tracked.
 - `docs/baseline_benchmark_analysis.md`: measured Stage 2 baseline behavior.
 - `docs/adaptive_aer_spec.md`: implemented Stage 3 adaptive RTL specification.
 - `docs/stage3_adaptive_analysis.md`: measured Stage 3 adaptive replay results.
+- `docs/physical_link_spec.md`: Stage 4 physical transport wire format.
+- `docs/stage4_comparison_analysis.md`: measured Stage 4 equal-link results.
 
 ## Main RTL
 
@@ -114,10 +144,22 @@ The current baseline top is:
 rtl/baseline/aer_baseline_top.sv
 ```
 
+The transport-normalized baseline top is:
+
+```text
+rtl/baseline/aer_baseline_link_top.sv
+```
+
 The current adaptive top is:
 
 ```text
 rtl/adaptive/aer_adaptive_top.sv
+```
+
+The transport-normalized adaptive top is:
+
+```text
+rtl/adaptive/aer_adaptive_link_top.sv
 ```
 
 ## Main Testbench
@@ -125,4 +167,8 @@ rtl/adaptive/aer_adaptive_top.sv
 ```text
 tb/tests/tb_baseline_directed.sv
 tb/tests/tb_adaptive_directed.sv
+tb/tests/tb_link_serializer_directed.sv
+tb/tests/tb_baseline_link_directed.sv
+tb/tests/tb_adaptive_link_directed.sv
+tb/tests/tb_stage4_compare.sv
 ```
