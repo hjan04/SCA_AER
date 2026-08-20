@@ -1,14 +1,14 @@
 # Stage 4 transport-normalized baseline AER synthesis.
-# Replace the placeholder with the full path to the target standard-cell
-# Liberty (.lib) file before running Genus.
-
-set LIBRARY_FILE "<라이브러리 경로>"
+set LIBRARY_FILE "/tools/config/GPDK/gsclib045_svt_v4.7/gsclib045/timing/slow_vdd1v0_basicCells.lib"
+set TECH_LEF_FILE "/tools/config/GPDK/gsclib045_svt_v4.7/gsclib045/lef/gsclib045_tech.lef"
+set MACRO_LEF_FILE "/tools/config/GPDK/gsclib045_svt_v4.7/gsclib045/lef/gsclib045_macro.lef"
 set SCRIPT_DIR [file dirname [file normalize [info script]]]
 set ROOT_DIR [file dirname $SCRIPT_DIR]
 set RESULT_DIR "$ROOT_DIR/results/baseline_link"
 
 set_db init_lib_search_path [list [file dirname $LIBRARY_FILE]]
 set_db library [list $LIBRARY_FILE]
+set_db lef_library [list $TECH_LEF_FILE $MACRO_LEF_FILE]
 
 read_hdl -sv [list \
     "$ROOT_DIR/rtl/common/aer_event_capture.sv" \
