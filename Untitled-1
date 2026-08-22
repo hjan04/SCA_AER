@@ -1,0 +1,8 @@
+git add scripts/
+git commit -m "add xcelium/genus scripts for traditional AER"
+
+git push
+
+
+cd ~/SCA_AER
+pwd
