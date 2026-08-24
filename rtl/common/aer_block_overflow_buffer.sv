@@ -51,21 +51,21 @@ module aer_block_overflow_buffer #(
             logic [AGE_W-1:0]          age_q [0:OVERFLOW_DEPTH-1];
             logic [AGE_W-1:0]          next_age_q;
 
-            logic [OVERFLOW_DEPTH-1:0] promote_remove;
-            logic                      push_accept;
-            integer                    push_slot;
+            // Combinational processing is deliberately split into one-way
+            // stages.  No stage writes a signal consumed by an earlier stage.
+            logic [OVERFLOW_DEPTH-1:0] promote_remove_c;
+            logic [OVERFLOW_DEPTH-1:0] empty_after_promote_c;
+            logic                      push_accept_c;
+            integer                    push_slot_c;
 
+            // Stage 1: inspect registered slots only and select the oldest
+            // matching entry for every promoted local pixel.
             always_comb begin
-                int count;
                 int selected_slot;
                 logic [AGE_W-1:0] selected_age;
-
                 promote_hit_o = '0;
                 promote_pol_o = '0;
-                promote_remove = '0;
-
-                // One independently-selected oldest entry for every primary
-                // slot cleared by the accepted sparse or dense packet.
+                promote_remove_c = '0;
                 for (int local_idx = 0; local_idx < BLOCK_PIXELS; local_idx++) begin
                     selected_slot = -1;
                     selected_age = '1;
@@ -84,21 +84,37 @@ module aer_block_overflow_buffer #(
                     if (selected_slot != -1) begin
                         promote_hit_o[local_idx] = 1'b1;
                         promote_pol_o[local_idx] = polarity_q[selected_slot];
-                        promote_remove[selected_slot] = 1'b1;
+                        promote_remove_c[selected_slot] = 1'b1;
                     end
                 end
+            end
 
-                // A slot being promoted this cycle can immediately accept the
-                // new push.  A new push is never itself promoted this cycle.
-                push_slot = -1;
+            // Stage 2: the sole definition of capacity available to push.
+            always_comb begin
                 for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
-                    if ((push_slot == -1) && (!valid_q[slot] || promote_remove[slot])) begin
-                        push_slot = slot;
+                    empty_after_promote_c[slot] = !valid_q[slot] || promote_remove_c[slot];
+                end
+            end
+
+            // Stage 3: allocate only from the finished stage-2 empty map.
+            always_comb begin
+                logic found_empty;
+                int selected_push_slot;
+                found_empty = 1'b0;
+                selected_push_slot = -1;
+                for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                    if (!found_empty && empty_after_promote_c[slot]) begin
+                        found_empty = 1'b1;
+                        selected_push_slot = slot;
                     end
                 end
-                push_accept = push_req && (push_slot != -1);
-                push_full_o = push_req && !push_accept;
+                push_accept_c = push_req && found_empty;
+                push_slot_c = selected_push_slot;
+                push_full_o = push_req && !found_empty;
+            end
 
+            always_comb begin
+                int count;
                 count = 0;
                 for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
                     if (valid_q[slot]) begin
@@ -120,16 +136,16 @@ module aer_block_overflow_buffer #(
                     end
                 end else begin
                     for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
-                        if (promote_remove[slot]) begin
+                        if (promote_remove_c[slot]) begin
                             valid_q[slot] <= 1'b0;
                         end
                     end
 
-                    if (push_accept) begin
-                        valid_q[push_slot] <= 1'b1;
-                        local_idx_q[push_slot] <= push_local_idx;
-                        polarity_q[push_slot] <= push_polarity;
-                        age_q[push_slot] <= next_age_q;
+                    if (push_accept_c) begin
+                        valid_q[push_slot_c] <= 1'b1;
+                        local_idx_q[push_slot_c] <= push_local_idx;
+                        polarity_q[push_slot_c] <= push_polarity;
+                        age_q[push_slot_c] <= next_age_q;
                         next_age_q <= next_age_q + 1'b1;
                     end
 
