@@ -14,10 +14,9 @@ module aer_block_overflow_buffer #(
     input  logic                    clk,
     input  logic                    rst_n,
 
-    input  logic                    push_req,
-    input  logic [3:0]              push_local_idx,
-    input  logic                    push_polarity,
-    output logic                    push_full_o,
+    input  logic [BLOCK_PIXELS-1:0] push_req_i,
+    input  logic [BLOCK_PIXELS-1:0] push_polarity_i,
+    output logic [BLOCK_PIXELS-1:0] push_reject_o,
 
     // A one bit means that the corresponding primary slot was transmitted in
     // this cycle.  Several bits can be set by a dense packet.
@@ -32,7 +31,7 @@ module aer_block_overflow_buffer #(
     // A zero-depth instance is the explicit Model2-compatible disable mode.
     generate
         if (OVERFLOW_DEPTH == 0) begin : g_disabled
-            assign push_full_o = 1'b1;
+            assign push_reject_o = '1;
             assign promote_hit_o = '0;
             assign promote_pol_o = '0;
             assign overflow_count_o = '0;
@@ -40,8 +39,8 @@ module aer_block_overflow_buffer #(
             always_ff @(posedge clk or negedge rst_n) begin
                 if (!rst_n) begin
                     overflow_loss_count_o <= '0;
-                end else if (push_req && !(&overflow_loss_count_o)) begin
-                    overflow_loss_count_o <= overflow_loss_count_o + 1'b1;
+                end else if ((|push_req_i) && !(&overflow_loss_count_o)) begin
+                    overflow_loss_count_o <= overflow_loss_count_o + $countones(push_req_i);
                 end
             end
         end else begin : g_enabled
@@ -55,8 +54,9 @@ module aer_block_overflow_buffer #(
             // stages.  No stage writes a signal consumed by an earlier stage.
             logic [OVERFLOW_DEPTH-1:0] promote_remove_c;
             logic [OVERFLOW_DEPTH-1:0] empty_after_promote_c;
-            logic                      push_accept_c;
-            integer                    push_slot_c;
+            logic [BLOCK_PIXELS-1:0] push_accept_c;
+            integer push_slot_c [0:BLOCK_PIXELS-1];
+            integer reject_count_c;
 
             // Stage 1: inspect registered slots only and select the oldest
             // matching entry for every promoted local pixel.
@@ -98,19 +98,27 @@ module aer_block_overflow_buffer #(
 
             // Stage 3: allocate only from the finished stage-2 empty map.
             always_comb begin
+                logic [OVERFLOW_DEPTH-1:0] available_slots;
                 logic found_empty;
-                int selected_push_slot;
-                found_empty = 1'b0;
-                selected_push_slot = -1;
-                for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
-                    if (!found_empty && empty_after_promote_c[slot]) begin
-                        found_empty = 1'b1;
-                        selected_push_slot = slot;
+                available_slots = empty_after_promote_c;
+                push_accept_c = '0;
+                push_reject_o = '0;
+                for (int local_idx = 0; local_idx < BLOCK_PIXELS; local_idx++) begin
+                    found_empty = 1'b0;
+                    push_slot_c[local_idx] = -1;
+                    if (push_req_i[local_idx]) begin
+                        for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                            if (!found_empty && available_slots[slot]) begin
+                                found_empty = 1'b1;
+                                push_slot_c[local_idx] = slot;
+                                available_slots[slot] = 1'b0;
+                            end
+                        end
+                        if (found_empty) push_accept_c[local_idx] = 1'b1;
+                        else push_reject_o[local_idx] = 1'b1;
                     end
                 end
-                push_accept_c = push_req && found_empty;
-                push_slot_c = selected_push_slot;
-                push_full_o = push_req && !found_empty;
+                reject_count_c = $countones(push_reject_o);
             end
 
             always_comb begin
@@ -141,16 +149,22 @@ module aer_block_overflow_buffer #(
                         end
                     end
 
-                    if (push_accept_c) begin
-                        valid_q[push_slot_c] <= 1'b1;
-                        local_idx_q[push_slot_c] <= push_local_idx;
-                        polarity_q[push_slot_c] <= push_polarity;
-                        age_q[push_slot_c] <= next_age_q;
-                        next_age_q <= next_age_q + 1'b1;
+                    for (int local_idx = 0; local_idx < BLOCK_PIXELS; local_idx++) begin
+                        if (push_accept_c[local_idx]) begin
+                            valid_q[push_slot_c[local_idx]] <= 1'b1;
+                            local_idx_q[push_slot_c[local_idx]] <= local_idx;
+                            polarity_q[push_slot_c[local_idx]] <= push_polarity_i[local_idx];
+                            age_q[push_slot_c[local_idx]] <= next_age_q + local_idx;
+                        end
+                    end
+                    if (|push_accept_c) begin
+                        next_age_q <= next_age_q + $countones(push_accept_c);
                     end
 
-                    if (push_full_o && !(&overflow_loss_count_o)) begin
-                        overflow_loss_count_o <= overflow_loss_count_o + 1'b1;
+                    if ((|push_reject_o) && !(&overflow_loss_count_o)) begin
+                        if (overflow_loss_count_o > ({LOSS_COUNT_W{1'b1}} - reject_count_c))
+                            overflow_loss_count_o <= '1;
+                        else overflow_loss_count_o <= overflow_loss_count_o + reject_count_c;
                     end
                 end
             end
