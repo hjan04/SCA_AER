@@ -20,6 +20,8 @@ module aer_adaptive_link_top #(
     parameter int DENSE_ENTER_THRESHOLD = 3,
     parameter int DENSE_EXIT_THRESHOLD = 1,
     parameter int HOLD_CYCLES = 4,
+    parameter int OVERFLOW_DEPTH = 3,
+    parameter int METRIC_COUNT_W = ((N_PIXELS + N_BLOCKS*OVERFLOW_DEPTH) <= 1) ? 1 : $clog2(N_PIXELS + N_BLOCKS*OVERFLOW_DEPTH + 1),
 
     parameter int SPARSE_PACKET_W = 1 + X_W + Y_W + 1,
     parameter int DENSE_PACKET_W = 1 + BLOCK_X_W + BLOCK_Y_W +
@@ -44,6 +46,10 @@ module aer_adaptive_link_top #(
 
     output logic                       busy_o,
     output logic                       dense_eligible_o,
+    output logic [METRIC_COUNT_W-1:0]  primary_unique_occupancy_o,
+    output logic [METRIC_COUNT_W-1:0]  overflow_count_o,
+    output logic [METRIC_COUNT_W-1:0]  total_pending_count_o,
+    output logic [METRIC_COUNT_W-1:0]  overflow_promoted_count_o,
 
     output logic                       logical_packet_accept_o,
     output logic [LINK_TYPE_W-1:0]     logical_packet_type_o,
@@ -66,6 +72,11 @@ module aer_adaptive_link_top #(
     logic [N_PIXELS-1:0]       pending;
     logic [N_PIXELS-1:0]       pending_pol;
     logic [N_PIXELS-1:0]       clear_mask;
+    logic [N_PIXELS-1:0]       promote_hit, promote_pol;
+    logic [N_PIXELS-1:0]       overflow_push_req, overflow_push_pol;
+    localparam int OVERFLOW_COUNT_W = (OVERFLOW_DEPTH <= 1) ? 1 : $clog2(OVERFLOW_DEPTH+1);
+    logic [N_BLOCKS*OVERFLOW_COUNT_W-1:0] block_overflow_count;
+    logic [N_BLOCKS*BLOCK_PIXELS-1:0] block_promote_hit, block_promote_pol;
 
     logic                      sparse_grant_valid;
     logic [X_W-1:0]            sparse_grant_x;
@@ -133,16 +144,59 @@ module aer_adaptive_link_top #(
     endfunction
 
     aer_event_capture #(
-        .N_PIXELS(N_PIXELS)
+        .N_PIXELS(N_PIXELS), .OVERFLOW_ENABLE(OVERFLOW_DEPTH > 0), .COUNT_W(METRIC_COUNT_W)
     ) u_capture (
         .clk(clk),
         .rst_n(rst_n),
         .pixel_event_valid_i(pixel_event_valid_i),
         .pixel_event_pol_i(pixel_event_pol_i),
         .clear_i(clear_mask),
+        .promote_hit_i(promote_hit), .promote_pol_i(promote_pol),
         .pending_o(pending),
-        .pending_pol_o(pending_pol)
+        .pending_pol_o(pending_pol),
+        .overflow_push_req_o(overflow_push_req), .overflow_push_pol_o(overflow_push_pol),
+        .primary_unique_occupancy_o(primary_unique_occupancy_o)
     );
+
+    generate
+        for (genvar b = 0; b < N_BLOCKS; b++) begin : g_overflow_block
+            logic [BLOCK_PIXELS-1:0] push_req, push_pol, promote_mask, push_reject;
+            logic [OVERFLOW_COUNT_W-1:0] count;
+            for (genvar l = 0; l < BLOCK_PIXELS; l++) begin : g_map
+                localparam int LX = l % BLOCK_W;
+                localparam int LY = l / BLOCK_W;
+                localparam int BX = b % BLOCK_X_COUNT;
+                localparam int BY = b / BLOCK_X_COUNT;
+                localparam int GX = BX*BLOCK_W + LX;
+                localparam int GY = BY*BLOCK_H + LY;
+                localparam int GI = GY*X_SIZE + GX;
+                if ((GX < X_SIZE) && (GY < Y_SIZE)) begin : g_valid
+                    assign push_req[l] = overflow_push_req[GI]; assign push_pol[l] = overflow_push_pol[GI];
+                    assign promote_mask[l] = clear_mask[GI];
+                    assign promote_hit[GI] = block_promote_hit[b*BLOCK_PIXELS+l];
+                    assign promote_pol[GI] = block_promote_pol[b*BLOCK_PIXELS+l];
+                end else begin : g_pad
+                    assign push_req[l]=1'b0; assign push_pol[l]=1'b0; assign promote_mask[l]=1'b0;
+                end
+            end
+            aer_block_overflow_buffer #(.OVERFLOW_DEPTH(OVERFLOW_DEPTH), .BLOCK_PIXELS(BLOCK_PIXELS), .COUNT_W(OVERFLOW_COUNT_W)) u_buf (
+                .clk(clk), .rst_n(rst_n), .push_req_i(push_req), .push_polarity_i(push_pol), .push_reject_o(push_reject),
+                .promote_mask_i(promote_mask), .promote_hit_o(block_promote_hit[b*BLOCK_PIXELS +: BLOCK_PIXELS]),
+                .promote_pol_o(block_promote_pol[b*BLOCK_PIXELS +: BLOCK_PIXELS]), .overflow_count_o(count), .overflow_loss_count_o()
+            );
+            assign block_overflow_count[b*OVERFLOW_COUNT_W +: OVERFLOW_COUNT_W] = count;
+        end
+    endgenerate
+    always_comb begin
+        int n; n=0;
+        for (int b=0;b<N_BLOCKS;b++) n += block_overflow_count[b*OVERFLOW_COUNT_W +: OVERFLOW_COUNT_W];
+        overflow_count_o = METRIC_COUNT_W'(n);
+        total_pending_count_o = primary_unique_occupancy_o + METRIC_COUNT_W'(n);
+    end
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) overflow_promoted_count_o <= '0;
+        else if (|promote_hit) overflow_promoted_count_o <= overflow_promoted_count_o + $countones(promote_hit);
+    end
 
     aer_row_col_arbiter #(
         .X_SIZE(X_SIZE),

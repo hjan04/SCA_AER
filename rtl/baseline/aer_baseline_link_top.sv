@@ -81,6 +81,8 @@ module aer_baseline_link_top #(
         .pixel_event_valid_i(pixel_event_valid_i),
         .pixel_event_pol_i(pixel_event_pol_i),
         .clear_i(clear_mask),
+        .promote_hit_i('0),
+        .promote_pol_i('0),
         .pending_o(pending),
         .pending_pol_o(pending_pol)
     );
