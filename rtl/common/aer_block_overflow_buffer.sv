@@ -1,0 +1,155 @@
+`timescale 1ns/1ps
+
+// Shared, per-block overflow storage for events whose primary pending bit is
+// already occupied.  Entries are selected associatively by local pixel index.
+// For a given local index, the entry with the smallest sequence tag is
+// promoted first, preserving FIFO order for repeated events from one pixel.
+module aer_block_overflow_buffer #(
+    parameter int OVERFLOW_DEPTH = 3,
+    parameter int BLOCK_PIXELS = 16,
+    parameter int LOSS_COUNT_W = 32,
+    parameter int COUNT_W = (OVERFLOW_DEPTH <= 1) ? 1 : $clog2(OVERFLOW_DEPTH + 1),
+    parameter int AGE_W = 32
+) (
+    input  logic                    clk,
+    input  logic                    rst_n,
+
+    input  logic                    push_req,
+    input  logic [3:0]              push_local_idx,
+    input  logic                    push_polarity,
+    output logic                    push_full_o,
+
+    // A one bit means that the corresponding primary slot was transmitted in
+    // this cycle.  Several bits can be set by a dense packet.
+    input  logic [BLOCK_PIXELS-1:0] promote_mask_i,
+    output logic [BLOCK_PIXELS-1:0] promote_hit_o,
+    output logic [BLOCK_PIXELS-1:0] promote_pol_o,
+
+    output logic [COUNT_W-1:0]      overflow_count_o,
+    output logic [LOSS_COUNT_W-1:0] overflow_loss_count_o
+);
+
+    // A zero-depth instance is the explicit Model2-compatible disable mode.
+    generate
+        if (OVERFLOW_DEPTH == 0) begin : g_disabled
+            assign push_full_o = 1'b1;
+            assign promote_hit_o = '0;
+            assign promote_pol_o = '0;
+            assign overflow_count_o = '0;
+
+            always_ff @(posedge clk or negedge rst_n) begin
+                if (!rst_n) begin
+                    overflow_loss_count_o <= '0;
+                end else if (push_req && !(&overflow_loss_count_o)) begin
+                    overflow_loss_count_o <= overflow_loss_count_o + 1'b1;
+                end
+            end
+        end else begin : g_enabled
+            logic [OVERFLOW_DEPTH-1:0] valid_q;
+            logic [3:0]                local_idx_q [0:OVERFLOW_DEPTH-1];
+            logic                      polarity_q [0:OVERFLOW_DEPTH-1];
+            logic [AGE_W-1:0]          age_q [0:OVERFLOW_DEPTH-1];
+            logic [AGE_W-1:0]          next_age_q;
+
+            logic [OVERFLOW_DEPTH-1:0] promote_remove;
+            logic                      push_accept;
+            integer                    push_slot;
+
+            always_comb begin
+                int count;
+                int selected_slot;
+                logic [AGE_W-1:0] selected_age;
+
+                promote_hit_o = '0;
+                promote_pol_o = '0;
+                promote_remove = '0;
+
+                // One independently-selected oldest entry for every primary
+                // slot cleared by the accepted sparse or dense packet.
+                for (int local_idx = 0; local_idx < BLOCK_PIXELS; local_idx++) begin
+                    selected_slot = -1;
+                    selected_age = '1;
+
+                    if (promote_mask_i[local_idx]) begin
+                        for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                            if (valid_q[slot] &&
+                                (local_idx_q[slot] == local_idx) &&
+                                ((selected_slot == -1) || (age_q[slot] < selected_age))) begin
+                                selected_slot = slot;
+                                selected_age = age_q[slot];
+                            end
+                        end
+                    end
+
+                    if (selected_slot != -1) begin
+                        promote_hit_o[local_idx] = 1'b1;
+                        promote_pol_o[local_idx] = polarity_q[selected_slot];
+                        promote_remove[selected_slot] = 1'b1;
+                    end
+                end
+
+                // A slot being promoted this cycle can immediately accept the
+                // new push.  A new push is never itself promoted this cycle.
+                push_slot = -1;
+                for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                    if ((push_slot == -1) && (!valid_q[slot] || promote_remove[slot])) begin
+                        push_slot = slot;
+                    end
+                end
+                push_accept = push_req && (push_slot != -1);
+                push_full_o = push_req && !push_accept;
+
+                count = 0;
+                for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                    if (valid_q[slot]) begin
+                        count++;
+                    end
+                end
+                overflow_count_o = COUNT_W'(count);
+            end
+
+            always_ff @(posedge clk or negedge rst_n) begin
+                if (!rst_n) begin
+                    valid_q <= '0;
+                    next_age_q <= '0;
+                    overflow_loss_count_o <= '0;
+                    for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                        local_idx_q[slot] <= '0;
+                        polarity_q[slot] <= 1'b0;
+                        age_q[slot] <= '0;
+                    end
+                end else begin
+                    for (int slot = 0; slot < OVERFLOW_DEPTH; slot++) begin
+                        if (promote_remove[slot]) begin
+                            valid_q[slot] <= 1'b0;
+                        end
+                    end
+
+                    if (push_accept) begin
+                        valid_q[push_slot] <= 1'b1;
+                        local_idx_q[push_slot] <= push_local_idx;
+                        polarity_q[push_slot] <= push_polarity;
+                        age_q[push_slot] <= next_age_q;
+                        next_age_q <= next_age_q + 1'b1;
+                    end
+
+                    if (push_full_o && !(&overflow_loss_count_o)) begin
+                        overflow_loss_count_o <= overflow_loss_count_o + 1'b1;
+                    end
+                end
+            end
+        end
+    endgenerate
+
+`ifndef SYNTHESIS
+    initial begin
+        if (BLOCK_PIXELS < 1 || BLOCK_PIXELS > 16) begin
+            $fatal(1, "BLOCK_PIXELS must be in the range 1..16");
+        end
+        if (LOSS_COUNT_W < 1 || AGE_W < 1) begin
+            $fatal(1, "LOSS_COUNT_W and AGE_W must be positive");
+        end
+    end
+`endif
+
+endmodule
