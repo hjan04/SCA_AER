@@ -134,7 +134,9 @@ module aer_adaptive_top #(
     endfunction
 
     aer_event_capture #(
-        .N_PIXELS(N_PIXELS)
+        .N_PIXELS(N_PIXELS),
+        .ENABLE_COUNTER(1),
+        .COUNTER_W(2)
     ) u_capture (
         .clk(clk),
         .rst_n(rst_n),
