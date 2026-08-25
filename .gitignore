@@ -30,6 +30,7 @@ results/csv/*
 !results/csv/baseline_summary.csv
 !results/csv/adaptive_stage3_summary.csv
 !results/csv/stage4_summary.csv
+!results/csv/stage4_model2_summary.csv
 
 !results/plots/
 results/plots/*
