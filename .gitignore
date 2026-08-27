@@ -49,3 +49,10 @@ __pycache__/
 *.swp
 *~
 .DS_Store
+
+# Genus run byproducts
+.rs_*.tstamp
+genus.cmd*
+genus.log*
+fv/
+synth/

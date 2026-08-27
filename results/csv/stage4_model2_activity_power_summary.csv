@@ -1,0 +1,5 @@
+workload,baseline_power_mw,model2_power_mw,power_reduction_pct,baseline_delivered,model2_delivered,baseline_loss_pct,model2_loss_pct,baseline_throughput_evt_per_cycle,model2_throughput_evt_per_cycle,baseline_energy_pj_per_delivered_event,model2_energy_pj_per_delivered_event,baseline_avg_latency_cycles,model2_avg_latency_cycles
+uniform_0p1,0.186781,0.176253,5.64,487,487,0.0000,0.0000,0.097400,0.097400,19.18,18.10,4.11,4.11
+uniform_0p8,0.412392,0.259101,37.17,2604,3761,35.0623,6.2095,0.499712,0.747565,8.25,3.47,178.78,26.42
+hotspot_4x4_p80_0p8,0.367159,0.267633,27.11,2506,3075,37.1929,22.9323,0.499701,0.613772,7.35,4.36,21.28,13.67
+burst_rate2_dur500,0.223244,0.170081,23.82,459,866,55.5233,16.0853,0.091800,0.173200,24.32,9.82,228.42,28.83
