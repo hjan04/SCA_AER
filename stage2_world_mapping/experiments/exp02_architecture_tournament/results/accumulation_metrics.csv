@@ -1,0 +1,6 @@
+candidate,total_events,concentration_max_over_total,normalized_shannon_entropy
+Golden,125,0.056,0.32086720122803997
+PWL-16-Q2.16,125,0.048,0.3420679211877802
+Global-Linear-Q2.16,125,0.032,0.40463143230157506
+Warp-Grid-T8,125,0.048,0.33687574119124175
+Naive,125,0.008,0.46438561897747255

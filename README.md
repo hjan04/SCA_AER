@@ -1,128 +1,49 @@
-# SCA AER
+# SCA AER: traffic-adaptive communication and world mapping
 
-Digital RTL project for comparing a conventional AER baseline against a future
-traffic-adaptive AER architecture for DVS-like pixel event traffic.
+This repository contains two related but distinct event-camera hardware studies. Both investigate how to amortize work when events share exploitable structure.
 
-## Current Stage
+## Stage 1 — Traffic-Adaptive AER communication
 
-Stage 1 is implemented:
+Stage 1 compares a conventional AER transmitter with sparse/dense packetization over a normalized physical link. The final adaptive direction is **Model2 with hysteresis**: dense packets are selected when a block reaches the entry threshold, and the mode is retained through short occupancy dips. The default entry threshold is 3, exit boundary is 1, and `HOLD_CYCLES` is 4.
 
-- conventional baseline AER RTL,
-- two-level row/column round-robin arbitration,
-- one-event-per-pixel pending capture semantics,
-- `{polarity, y, x}` output packet,
-- synchronous four-phase `REQ/ACK` output interface,
-- directed self-checking baseline simulation.
+Stage 1 amortizes **communication packet overhead as a function of event traffic and block occupancy**. It does not use the Stage 2 mapper or world-memory architecture.
 
-Stage 2 baseline characterization is also implemented:
+Run the directed adaptive and hysteresis tests with Icarus Verilog:
 
-- reproducible trace generation,
-- baseline RTL replay benchmark,
-- per-run CSV metrics,
-- summary CSV generation,
-- diagnostic plots,
-- baseline bottleneck and bitmap break-even analysis.
-
-Stage 3 traffic-adaptive sparse/dense block bitmap AER is implemented:
-
-- same one-event-per-pixel capture semantics as the baseline,
-- sparse packet mode for low-density traffic,
-- 4x4 dense block bitmap packet mode,
-- directed self-checking adaptive simulation,
-- preliminary Stage 2 trace replay and threshold sweep.
-
-Final equal-bandwidth baseline-vs-adaptive claims are intentionally deferred
-until Stage 4 adds a common fixed-width physical output link or serializer.
-
-## Quick Start
-
-Run the baseline directed tests:
-
-```bash
-scripts/run_baseline_sim.sh
-```
-
-Expected final line:
-
-```text
-BASELINE DIRECTED TESTS: PASS
-```
-
-The waveform is written to:
-
-```text
-results/waves/baseline_directed.vcd
-```
-
-Run a small benchmark smoke test:
-
-```bash
-scripts/sweep_baseline_traffic.py --preset smoke
-```
-
-Run the full Stage 2 baseline benchmark sweep:
-
-```bash
-scripts/sweep_baseline_traffic.py --preset stage2
-```
-
-This regenerates Stage 2 traces under `traces/generated/stage2/`, per-run CSVs
-under `results/csv/runs/stage2/`, plots under `results/plots/`, and the tracked
-summary `results/csv/baseline_summary.csv`.
-
-Run the adaptive directed tests:
-
-```bash
+```sh
 scripts/run_adaptive_sim.sh
+iverilog -g2012 -s tb_mode_hysteresis_directed -o /tmp/tb_hysteresis.vvp \
+  rtl/adaptive/aer_mode_controller.sv tb/tests/tb_mode_hysteresis_directed.sv
+vvp /tmp/tb_hysteresis.vvp
 ```
 
-Run the Stage 3 adaptive trace replay and threshold sweep:
+Run the Model2 traffic and break-even sweeps with Python 3 and Icarus Verilog:
 
-```bash
-scripts/sweep_adaptive_stage3.py
+```sh
+python3 scripts/sweep_stage4_model2.py
+python3 scripts/sweep_stage4_breakeven.py
 ```
 
-Stage 3 replay uses the Stage 2 generated traces. If those traces are missing in
-a fresh clone, run the Stage 2 sweep first. The Stage 3 sweep regenerates
-per-run adaptive results under `results/csv/runs/stage3/` and the tracked
-summary `results/csv/adaptive_stage3_summary.csv`.
+Stage 1 Genus scripts and compact reports are in `scripts/genus_*model2*` and `results/adaptive_link_model2*/`. Activity-power comparisons are VCD-driven logic estimates for four workloads; they are not post-CTS or whole-chip power. The Model2 9.4 ns synthesis point closes with zero slack; this is a tested point, not an exact continuous Fmax search. See [Stage 1 Model2 evidence](docs/stage1_model2_evidence.md).
 
-Generated traces, logs, waveforms, simulator binaries, and per-run result files
-are ignored by Git because they are reproducible from these scripts. The compact
-summary CSVs and analysis documents are tracked.
+## Stage 2 — Event-to-world mapping accelerator
 
-## Key Documents
+Stage 2 maps pixel events through a pose-dependent ray grid into a 256×128 world map. The selected architecture is E-lite: T32 grid, Q1.15 arithmetic, two mapper lanes, integer square root, CORDIC24/BAM32, native-word grid-read reuse, consecutive merge, and four banks. The complete mapper lane has 53 enabled edges and II=1. Stage 2 amortizes **world-memory updates as a function of spatial locality and repeated native-word/grid accesses**.
 
-- `docs/architecture_plan.md`: approved staged project plan.
-- `docs/baseline_spec.md`: implemented Stage 1 baseline specification.
-- `docs/benchmark_methodology.md`: Stage 2 trace and metric definitions.
-- `docs/baseline_benchmark_analysis.md`: measured Stage 2 baseline behavior.
-- `docs/adaptive_aer_spec.md`: implemented Stage 3 adaptive RTL specification.
-- `docs/stage3_adaptive_analysis.md`: measured Stage 3 adaptive replay results.
+See [`stage2_world_mapping/README.md`](stage2_world_mapping/README.md) for architecture exploration, software models, RTL, tests, synthesis and real-data evidence.
 
-## Main RTL
+## Evidence and repository layout
 
-```text
-rtl/common/
-rtl/baseline/
-rtl/adaptive/
-```
+- `rtl/`, `tb/`, `scripts/`, `results/`, `docs/`: Stage 1 sources and compact evidence.
+- `stage2_world_mapping/`: canonical Stage 2 project, with preserved development-history folders and curated final structure.
+- `docs/CLAIMS_AND_EVIDENCE_INDEX.md`: headline claims, evidence paths and limitations across both stages.
+- `integration_final/`: pre-integration hashes and final integration record.
+- `stage2_repo_audit/`: audit and integration planning records.
 
-The current baseline top is:
+Large raw recordings, full decode caches, VCD/SAIF, simulator build products and server snapshots remain local-only. The sampled two-frame Sept 22 traffic fixture used by the system test is retained under `stage2_world_mapping/reference/real_traffic/`.
 
-```text
-rtl/baseline/aer_baseline_top.sv
-```
+## Shared principle and limits
 
-The current adaptive top is:
+The shared engineering principle is exploiting repeated structure to reduce amortized work. Stage 1 applies it to communication packetization; Stage 2 applies it to mapping and memory updates. They have separate inputs, architectures, verification and PPA evidence.
 
-```text
-rtl/adaptive/aer_adaptive_top.sv
-```
-
-## Main Testbench
-
-```text
-tb/tests/tb_baseline_directed.sv
-tb/tests/tb_adaptive_directed.sv
-```
+Neither stage demonstrates full-chip post-layout power. Stage 2 real recordings establish traffic behavior, not pose ground truth; the assumed uniform-within-frame arrival model does not recover physical sensor microbursts. See the stage-specific evidence documents for detailed limitations.

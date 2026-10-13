@@ -1,0 +1,8 @@
+Final local numeric RTL regression
+
+PASS wm_lerp + wm_mapper_lane: 8,064 vectors; complete lane latency 53 enabled edges
+PASS wm_isqrt: 33,231 vectors; latency 28
+PASS wm_cordic_vectoring: 66,462 vectors; latency 24
+PASS wm_ray2angle + wm_world_quant: 33,231 vectors; internal ray2angle latency 52
+
+All numeric RTL regressions passed. Complete lane latency includes the CE-enabled interpolation-output register.

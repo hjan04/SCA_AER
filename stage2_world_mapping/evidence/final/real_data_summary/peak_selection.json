@@ -1,0 +1,20 @@
+{
+  "event_count_peak": {
+    "recording": "2026-09-22-16-42-44-DELTA.dvs",
+    "frame_index": 513,
+    "event_count": 125806,
+    "native_word_count": 32295,
+    "frame_start_t_us": 23424242,
+    "frame_interval_us": 3093,
+    "event_rate_per_s": 40674426.12350469
+  },
+  "event_rate_peak": {
+    "recording": "2026-09-22-16-42-44-DELTA.dvs",
+    "frame_index": 790,
+    "event_count": 85194,
+    "native_word_count": 20386,
+    "frame_start_t_us": 23640762,
+    "frame_interval_us": 774,
+    "event_rate_per_s": 110069767.44186047
+  }
+}

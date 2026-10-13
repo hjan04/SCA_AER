@@ -1,0 +1,7 @@
+case,accumulator_mode,threshold,input_events,expected_rmw_requests,updates_preserved,sum_delta_preserved,physical_word_model,lane_rule
+same_cell_two_lanes,unsigned_count,2,2,1,2,2,4x4 tile; per-cell masked payload,lane id is ignored after events are associated with the same native group
+different_cells_same_word,unsigned_count,2,2,1,2,2,4x4 tile; per-cell masked payload,lane id is ignored after events are associated with the same native group
+different_world_words,unsigned_count,2,2,2,2,2,4x4 tile; per-cell masked payload,lane id is ignored after events are associated with the same native group
+same_cell_opposite_polarity,unsigned_count,2,2,1,2,2,4x4 tile; per-cell masked payload,lane id is ignored after events are associated with the same native group
+same_cell_opposite_polarity,signed_count,2,2,1,2,0,4x4 tile; per-cell masked payload,lane id is ignored after events are associated with the same native group
+same_cell_opposite_polarity,separate_on_off,2,2,2,2,2,4x4 tile; per-cell masked payload,lane id is ignored after events are associated with the same native group

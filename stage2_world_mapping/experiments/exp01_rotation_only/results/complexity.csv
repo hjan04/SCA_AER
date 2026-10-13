@@ -1,0 +1,4 @@
+model,lut_reads,add_sub,multiply,divide,sqrt,atan,atan2,lut_entries_setup,atan_setup,notes
+G,0,8,9,2,1,0,2,0,0,rotation matrix products + pinhole divisions + atan2; pose sin/cos setup excluded
+L,1,2,1,2,1,0,1,960,960,"horizontal LUT read; add yaw; constant-scale map quantization; vertical coordinate uses geometric division, sqrt, atan2; setup cost reported separately"
+A,0,3,2,2,1,0,1,0,0,"subtraction, slope multiply, yaw add, constant-scale quantization; vertical coordinate uses geometric division, sqrt, atan2"

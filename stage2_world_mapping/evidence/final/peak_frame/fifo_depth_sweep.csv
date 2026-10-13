@@ -1,0 +1,6 @@
+fifo_depth,peak_fifo_occupancy,overflow,dropped_events,source_words_remaining_at_boundary,fifo_words_at_boundary,pending_contributions_at_boundary,drain_tail_cycles,test_result,log
+16,7,0,0,0,1,64,63,PASS,final_evidence/peak_frame/run_logs/recovered_paced_depth16.log
+32,7,0,0,0,1,64,63,PASS,final_evidence/peak_frame/run_logs/recovered_paced_depth32.log
+64,7,0,0,0,1,64,63,PASS,final_evidence/peak_frame/run_logs/recovered_paced_depth64.log
+128,7,0,0,0,1,64,63,PASS,final_evidence/peak_frame/run_logs/recovered_paced_depth128.log
+256,7,0,0,0,1,64,63,PASS,final_evidence/peak_frame/run_logs/recovered_paced_depth256.log

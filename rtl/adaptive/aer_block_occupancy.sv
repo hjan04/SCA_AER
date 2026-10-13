@@ -11,16 +11,25 @@ module aer_block_occupancy #(
     parameter int N_BLOCKS = BLOCK_X_COUNT * BLOCK_Y_COUNT,
     parameter int N_PIXELS = X_SIZE * Y_SIZE,
     parameter int OCC_W = (BLOCK_PIXELS <= 1) ? 1 : $clog2(BLOCK_PIXELS + 1),
-    parameter int DENSE_ENTER_THRESHOLD = 5
+    parameter int DENSE_ENTER_THRESHOLD = 3,
+    parameter int DENSE_EXIT_THRESHOLD = 1
 ) (
     input  logic [N_PIXELS-1:0]       pending_i,
 
+    // Kept as the entry request for compatibility with existing users.
     output logic [N_BLOCKS-1:0]       dense_req_o,
+    // Any non-empty block can be packetized while the registered dense mode
+    // is held.  dense_hold_req_o marks occupancy strictly above the exit
+    // threshold and resets the controller's exit debounce counter.
+    output logic [N_BLOCKS-1:0]       dense_active_req_o,
+    output logic [N_BLOCKS-1:0]       dense_hold_req_o,
     output logic [N_BLOCKS*OCC_W-1:0] block_occupancy_o
 );
 
     always_comb begin
         dense_req_o = '0;
+        dense_active_req_o = '0;
+        dense_hold_req_o = '0;
         block_occupancy_o = '0;
 
         for (int block_y = 0; block_y < BLOCK_Y_COUNT; block_y++) begin
@@ -53,6 +62,9 @@ module aer_block_occupancy #(
                     OCC_W'(occupancy);
                 dense_req_o[block_index] =
                     (occupancy >= DENSE_ENTER_THRESHOLD);
+                dense_active_req_o[block_index] = (occupancy != 0);
+                dense_hold_req_o[block_index] =
+                    (occupancy > DENSE_EXIT_THRESHOLD);
             end
         end
     end

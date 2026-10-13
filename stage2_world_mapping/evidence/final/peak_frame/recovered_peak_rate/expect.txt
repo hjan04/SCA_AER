@@ -1,0 +1,9 @@
+words=20386
+events=85194
+dropped=0
+elite_records=0
+elite_merged=0
+d2_records=0
+sat_loss=-1
+issue_cycles=0
+frames=1

@@ -1,0 +1,217 @@
+fx_px,candidate,scenario,lut_reads_per_event,add_sub_per_event,multiply_per_event,shift_per_event,interpolation_ops_per_event,division_per_event,sqrt_per_event,trig_per_event,counted_ops_unweighted,per_pose_node_evals,per_pose_matrix_trig,per_pose_matrix_arithmetic,frame_cost_note
+600.0,Golden,yaw_only,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+600.0,C0a-Full-Column-LUT,yaw_only,1,1,1,0,0,2,1,1,7,0,2,3,exact geometric vertical path; pitch/roll invalid
+600.0,C0b-2D-Ray-LUT,yaw_only,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+600.0,Global-Linear-float,yaw_only,0,3,2,0,0,2,1,1,9,0,2,3,pose matrix setup amortized
+600.0,Global-Linear-Q2.16,yaw_only,0,3,2,0,0,2,1,1,9,0,2,3,pose matrix setup amortized
+600.0,PWL-2-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-2-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-4-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-4-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-8-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-8-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-16-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-16-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,Column-LUT-Interp-1px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Column-LUT-Interp-2px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Column-LUT-Interp-4px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Column-LUT-Interp-8px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Column-LUT-Interp-16px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Column-LUT-Interp-32px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Column-LUT-Interp-64px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+600.0,Warp-Grid-T8,yaw_only,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T16,yaw_only,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T32,yaw_only,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T64,yaw_only,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Golden,yaw_pitch,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+600.0,C0a-Full-Column-LUT,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,C0b-2D-Ray-LUT,yaw_pitch,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+600.0,Global-Linear-float,yaw_pitch,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+600.0,Global-Linear-Q2.16,yaw_pitch,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+600.0,PWL-2-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-2-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-4-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-4-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-8-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-8-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-16-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-16-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,Column-LUT-Interp-1px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-2px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-4px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-8px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-16px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-32px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-64px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Warp-Grid-T8,yaw_pitch,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T16,yaw_pitch,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T32,yaw_pitch,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T64,yaw_pitch,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Golden,three_axis,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+600.0,C0a-Full-Column-LUT,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,C0b-2D-Ray-LUT,three_axis,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+600.0,Global-Linear-float,three_axis,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+600.0,Global-Linear-Q2.16,three_axis,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+600.0,PWL-2-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-2-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-4-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-4-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-8-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-8-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-16-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,PWL-16-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+600.0,Column-LUT-Interp-1px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-2px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-4px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-8px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-16px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-32px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Column-LUT-Interp-64px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+600.0,Warp-Grid-T8,three_axis,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T16,three_axis,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T32,three_axis,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+600.0,Warp-Grid-T64,three_axis,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Golden,yaw_only,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+800.0,C0a-Full-Column-LUT,yaw_only,1,1,1,0,0,2,1,1,7,0,2,3,exact geometric vertical path; pitch/roll invalid
+800.0,C0b-2D-Ray-LUT,yaw_only,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+800.0,Global-Linear-float,yaw_only,0,3,2,0,0,2,1,1,9,0,2,3,pose matrix setup amortized
+800.0,Global-Linear-Q2.16,yaw_only,0,3,2,0,0,2,1,1,9,0,2,3,pose matrix setup amortized
+800.0,PWL-2-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-2-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-4-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-4-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-8-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-8-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-16-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-16-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,Column-LUT-Interp-1px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Column-LUT-Interp-2px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Column-LUT-Interp-4px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Column-LUT-Interp-8px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Column-LUT-Interp-16px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Column-LUT-Interp-32px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Column-LUT-Interp-64px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+800.0,Warp-Grid-T8,yaw_only,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T16,yaw_only,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T32,yaw_only,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T64,yaw_only,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Golden,yaw_pitch,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+800.0,C0a-Full-Column-LUT,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,C0b-2D-Ray-LUT,yaw_pitch,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+800.0,Global-Linear-float,yaw_pitch,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+800.0,Global-Linear-Q2.16,yaw_pitch,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+800.0,PWL-2-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-2-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-4-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-4-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-8-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-8-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-16-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-16-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,Column-LUT-Interp-1px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-2px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-4px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-8px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-16px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-32px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-64px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Warp-Grid-T8,yaw_pitch,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T16,yaw_pitch,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T32,yaw_pitch,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T64,yaw_pitch,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Golden,three_axis,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+800.0,C0a-Full-Column-LUT,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,C0b-2D-Ray-LUT,three_axis,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+800.0,Global-Linear-float,three_axis,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+800.0,Global-Linear-Q2.16,three_axis,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+800.0,PWL-2-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-2-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-4-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-4-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-8-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-8-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-16-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,PWL-16-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+800.0,Column-LUT-Interp-1px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-2px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-4px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-8px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-16px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-32px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Column-LUT-Interp-64px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+800.0,Warp-Grid-T8,three_axis,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T16,three_axis,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T32,three_axis,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+800.0,Warp-Grid-T64,three_axis,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Golden,yaw_only,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+1000.0,C0a-Full-Column-LUT,yaw_only,1,1,1,0,0,2,1,1,7,0,2,3,exact geometric vertical path; pitch/roll invalid
+1000.0,C0b-2D-Ray-LUT,yaw_only,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+1000.0,Global-Linear-float,yaw_only,0,3,2,0,0,2,1,1,9,0,2,3,pose matrix setup amortized
+1000.0,Global-Linear-Q2.16,yaw_only,0,3,2,0,0,2,1,1,9,0,2,3,pose matrix setup amortized
+1000.0,PWL-2-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-2-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-4-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-4-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-8-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-8-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-16-float,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-16-Q2.16,yaw_only,0,4,2,0,0,2,1,1,10,0,2,3,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,Column-LUT-Interp-1px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Column-LUT-Interp-2px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Column-LUT-Interp-4px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Column-LUT-Interp-8px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Column-LUT-Interp-16px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Column-LUT-Interp-32px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Column-LUT-Interp-64px,yaw_only,2,3,1,1,1,2,1,1,11,0,2,3,power-of-two fraction via shift; exact geometric vertical path
+1000.0,Warp-Grid-T8,yaw_only,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T16,yaw_only,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T32,yaw_only,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T64,yaw_only,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Golden,yaw_pitch,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+1000.0,C0a-Full-Column-LUT,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,C0b-2D-Ray-LUT,yaw_pitch,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+1000.0,Global-Linear-float,yaw_pitch,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+1000.0,Global-Linear-Q2.16,yaw_pitch,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+1000.0,PWL-2-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-2-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-4-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-4-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-8-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-8-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-16-float,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-16-Q2.16,yaw_pitch,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,Column-LUT-Interp-1px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-2px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-4px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-8px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-16px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-32px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-64px,yaw_pitch,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Warp-Grid-T8,yaw_pitch,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T16,yaw_pitch,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T32,yaw_pitch,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T64,yaw_pitch,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Golden,three_axis,0,8,9,0,0,2,1,2,22,0,6,15,pose matrix setup amortized
+1000.0,C0a-Full-Column-LUT,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,C0b-2D-Ray-LUT,three_axis,3,6,9,0,0,0,1,2,21,0,6,15,matrix setup per pose
+1000.0,Global-Linear-float,three_axis,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+1000.0,Global-Linear-Q2.16,three_axis,0,9,11,0,0,2,2,7,31,0,6,15,pose matrix setup amortized
+1000.0,PWL-2-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-2-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-4-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-4-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-8-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-8-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-16-float,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,PWL-16-Q2.16,three_axis,0,10,11,0,0,2,2,7,32,0,6,15,segment comparisons/selection excluded from primitive count; pose setup amortized
+1000.0,Column-LUT-Interp-1px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-2px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-4px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-8px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-16px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-32px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Column-LUT-Interp-64px,three_axis,0,0,0,0,0,0,0,0,0,0,0,0,INVALID outside yaw-only
+1000.0,Warp-Grid-T8,three_axis,12,9,9,4,9,0,1,2,37,11011,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T16,three_axis,12,9,9,4,9,0,1,2,37,2806,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T32,three_axis,12,9,9,4,9,0,1,2,37,744,6,15,bilinear vector interpolation; per-pose node generation
+1000.0,Warp-Grid-T64,three_axis,12,9,9,4,9,0,1,2,37,208,6,15,bilinear vector interpolation; per-pose node generation

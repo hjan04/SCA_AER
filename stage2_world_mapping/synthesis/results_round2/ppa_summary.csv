@@ -1,0 +1,6 @@
+round,architecture,mode,period_ns,frequency_mhz,cell_area,net_area,total_area,leaf_instances,sequential_instances,combinational_instances,worst_slack_ps,tns_ps,violating_paths,vectorless_power_w,critical_path
+Round1,D2,MODE1,10.000,100,472094.406,174891.068,646985.474,139426,23313,116113,-2141.9,-132438.9,92,0.0364060,"u_reuse register -> wm_lerp -> wm_ray2angle radial preparation -> wm_isqrt first pipeline register"
+Round1,E-lite,MODE1,10.000,100,517957.974,190361.452,708319.426,151222,26799,124423,-2145.8,-126057.3,92,0.0395705,"u_reuse register -> wm_lerp -> wm_ray2angle radial preparation -> wm_isqrt first pipeline register"
+Round2,D2,MODE1,10.000,100,447464.934,168887.663,616352.597,132831,23413,109418,0.0,0.0,0,0.0333356,"u_reuse/l1_n01[z][1] -> u_lane1/u_lerp_z -> u_lane1/ray_z_reg[2]"
+Round2,E-lite,MODE1,10.000,100,493230.690,184654.824,677885.514,145357,26919,118438,0.0,0.0,0,0.0368067,"u_reuse/l1_n11[z][10] -> u_lane1/u_lerp_z -> u_lane1/ray_z_reg[9]"
+Round2,E-lite,MODE1,6.667,149.993,589899.384,213514.771,803414.155,175174,26919,148255,-2352.6,-229087.9,141,0.0684154,"u_reuse/l0_n00[y][4] -> u_lane0/u_lerp_y -> u_lane0/ray_y_reg[9]"

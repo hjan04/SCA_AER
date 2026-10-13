@@ -1,0 +1,4 @@
+frame_index,elapsed_cycles,source_words_remaining,fifo_words,numeric_pipeline_events,mapped_record_pending_events,pending_memory_transactions,pending_internal_contributions,pending_total_contributions
+789,77300,0,1,63,4,2,69,70
+790,154700,0,1,59,1,2,62,64
+791,232000,0,1,65,3,0,68,71

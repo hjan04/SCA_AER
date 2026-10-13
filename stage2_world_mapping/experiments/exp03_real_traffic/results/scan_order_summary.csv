@@ -1,0 +1,4 @@
+dataset,colmajor_nondecreasing_frac,colmajor_violation_frac,rowmajor_nondecreasing_frac,x_nondecreasing_frac,column_word_increasing_frac,column_words_per_frame_mean,column_words_without_events_frac,frames
+sept15_yaw,0.967411,0.032589,0.945414,1,0.998049,946.84,0.0019489,2060
+sept22a_1642_32,0.969667,0.0303334,0.94584,1,0.998029,902.968,0.00196852,2057
+sept22b_1642_44,0.973115,0.0268855,0.951684,1,0.998064,941.799,0.00225231,2053

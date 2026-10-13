@@ -1,0 +1,6 @@
+source=/home/aiasic26913/SCA_AER_STAGE2/stage2_integration_local/real_data/2026-09-22-16-42-44-DELTA.dvs
+source_sha256=dd7521e8eef54b125d4564c52db880cd69491591cb2fa2f8aa3f669bc1e42db8
+frames=[789, 790, 791]
+pose_convention=synthetic/identity architectural T32 grid (fx=fy=800); not pose ground truth
+ordering=restored Exp03 source event-word index; slot A then B; LSB-first pixel order; polarity preserved
+native words=event words with at least one in-range decoded pixel contribution

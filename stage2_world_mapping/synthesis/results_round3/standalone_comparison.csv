@@ -1,0 +1,12 @@
+Metric,CORDIC_BASELINE,DIRECT_BIN
+Cell Area,132766.110,107274.114
+Net Area,54486.978,48650.179
+Total Area,187253.088,155924.293
+Sequential Instances,6810,414
+Combinational Instances,36088,33779
+WNS ns,0.000,0.300
+TNS ps,0,0
+Violating Paths,0,0
+Vectorless Power mW,10.6986,13.1151
+Latency enabled edges,52,4
+Initiation Interval enabled cycles,1,1

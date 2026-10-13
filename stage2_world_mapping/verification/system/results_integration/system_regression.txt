@@ -1,0 +1,30 @@
+Final local system regression
+=============================
+
+Run from the canonical `stage2_world_mapping/` tree with:
+  python3 verification/system/run_system_tests.py --build-dir /tmp/wm_system_build
+
+Result: SYSTEM REGRESSION: 21/21 passed
+Numeric source: stage2_world_mapping/rtl
+Reference model: stage2_world_mapping/model
+Build output: /tmp/wm_system_build (local, generated)
+
+Coverage includes D2/E-lite equivalence; metadata alignment; event conservation;
+random CE stalls; bank holds and RAW bypass at RD_LAT=1 and RD_LAT=3; FIFO depth
+8; frame/grid swap; partial-grid protection; clear; invalid-coordinate drops;
+numeric vectors; real Sept. 22b subset; and no-reuse RD_LAT=3 comparison.
+
+40,000-event real-subset, no-reuse, RD_LAT=3 comparison (no explicit stress
+stalls):
+
+| Metric | E-lite | D2 |
+|---|---:|---:|
+| Cycles | 22,248 | 33,568 |
+| Stalls | 56 | 11,374 |
+| Conflicts | 3,207 | 16,957 |
+| RMW/event | 0.441 | 1.000 |
+| Dropped | 0 | 0 |
+
+Both variants: 40,000 events, issue efficiency 0.914, 31,348 saturated
+contributions. These values are from the no-reuse RD_LAT=3 scenario and must
+not be mixed with the stress variant that injects stalls/holds.

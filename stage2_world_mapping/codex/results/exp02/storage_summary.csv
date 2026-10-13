@@ -1,0 +1,73 @@
+fx_px,candidate,family,entries,bits_per_entry,storage_bits,storage_kib,scope,note
+600.0,Golden,reference,0,0,0,0.0,none,software reference
+600.0,C0a-Full-Column-LUT,column_lut,960,16,15360,1.875,per calibration,signed Q3.13 angle
+600.0,C0b-2D-Ray-LUT,2d_ray_lut,691200,48,33177600,4050.0,per calibration,three signed Q1.15 unit-ray components
+600.0,Global-Linear-float,global_linear,1,32,32,0.00390625,per calibration,one float32 slope; zero intercept by symmetry
+600.0,Global-Linear-Q2.16,global_linear,1,18,18,0.002197265625,per calibration,one signed Q2.16 slope
+600.0,PWL-2-float,piecewise_linear,4,32,128,0.015625,per calibration,symmetric; 2 positive-side segments; slope/intercept per segment
+600.0,PWL-2-Q2.16,piecewise_linear,4,18,72,0.0087890625,per calibration,symmetric; 2 positive-side segments; slope/intercept per segment
+600.0,PWL-4-float,piecewise_linear,8,32,256,0.03125,per calibration,symmetric; 4 positive-side segments; slope/intercept per segment
+600.0,PWL-4-Q2.16,piecewise_linear,8,18,144,0.017578125,per calibration,symmetric; 4 positive-side segments; slope/intercept per segment
+600.0,PWL-8-float,piecewise_linear,16,32,512,0.0625,per calibration,symmetric; 8 positive-side segments; slope/intercept per segment
+600.0,PWL-8-Q2.16,piecewise_linear,16,18,288,0.03515625,per calibration,symmetric; 8 positive-side segments; slope/intercept per segment
+600.0,PWL-16-float,piecewise_linear,32,32,1024,0.125,per calibration,symmetric; 16 positive-side segments; slope/intercept per segment
+600.0,PWL-16-Q2.16,piecewise_linear,32,18,576,0.0703125,per calibration,symmetric; 16 positive-side segments; slope/intercept per segment
+600.0,Column-LUT-Interp-1px,interpolated_lut,960,16,15360,1.875,per calibration,signed Q3.13 angle nodes
+600.0,Column-LUT-Interp-2px,interpolated_lut,481,16,7696,0.939453125,per calibration,signed Q3.13 angle nodes
+600.0,Column-LUT-Interp-4px,interpolated_lut,241,16,3856,0.470703125,per calibration,signed Q3.13 angle nodes
+600.0,Column-LUT-Interp-8px,interpolated_lut,121,16,1936,0.236328125,per calibration,signed Q3.13 angle nodes
+600.0,Column-LUT-Interp-16px,interpolated_lut,61,16,976,0.119140625,per calibration,signed Q3.13 angle nodes
+600.0,Column-LUT-Interp-32px,interpolated_lut,31,16,496,0.060546875,per calibration,signed Q3.13 angle nodes
+600.0,Column-LUT-Interp-64px,interpolated_lut,16,16,256,0.03125,per calibration,signed Q3.13 angle nodes
+600.0,Warp-Grid-T8,warp_grid,11011,48,528528,64.517578125,per pose interval,three signed Q1.15 world-ray components/node
+600.0,Warp-Grid-T16,warp_grid,2806,48,134688,16.44140625,per pose interval,three signed Q1.15 world-ray components/node
+600.0,Warp-Grid-T32,warp_grid,744,48,35712,4.359375,per pose interval,three signed Q1.15 world-ray components/node
+600.0,Warp-Grid-T64,warp_grid,208,48,9984,1.21875,per pose interval,three signed Q1.15 world-ray components/node
+800.0,Golden,reference,0,0,0,0.0,none,software reference
+800.0,C0a-Full-Column-LUT,column_lut,960,16,15360,1.875,per calibration,signed Q3.13 angle
+800.0,C0b-2D-Ray-LUT,2d_ray_lut,691200,48,33177600,4050.0,per calibration,three signed Q1.15 unit-ray components
+800.0,Global-Linear-float,global_linear,1,32,32,0.00390625,per calibration,one float32 slope; zero intercept by symmetry
+800.0,Global-Linear-Q2.16,global_linear,1,18,18,0.002197265625,per calibration,one signed Q2.16 slope
+800.0,PWL-2-float,piecewise_linear,4,32,128,0.015625,per calibration,symmetric; 2 positive-side segments; slope/intercept per segment
+800.0,PWL-2-Q2.16,piecewise_linear,4,18,72,0.0087890625,per calibration,symmetric; 2 positive-side segments; slope/intercept per segment
+800.0,PWL-4-float,piecewise_linear,8,32,256,0.03125,per calibration,symmetric; 4 positive-side segments; slope/intercept per segment
+800.0,PWL-4-Q2.16,piecewise_linear,8,18,144,0.017578125,per calibration,symmetric; 4 positive-side segments; slope/intercept per segment
+800.0,PWL-8-float,piecewise_linear,16,32,512,0.0625,per calibration,symmetric; 8 positive-side segments; slope/intercept per segment
+800.0,PWL-8-Q2.16,piecewise_linear,16,18,288,0.03515625,per calibration,symmetric; 8 positive-side segments; slope/intercept per segment
+800.0,PWL-16-float,piecewise_linear,32,32,1024,0.125,per calibration,symmetric; 16 positive-side segments; slope/intercept per segment
+800.0,PWL-16-Q2.16,piecewise_linear,32,18,576,0.0703125,per calibration,symmetric; 16 positive-side segments; slope/intercept per segment
+800.0,Column-LUT-Interp-1px,interpolated_lut,960,16,15360,1.875,per calibration,signed Q3.13 angle nodes
+800.0,Column-LUT-Interp-2px,interpolated_lut,481,16,7696,0.939453125,per calibration,signed Q3.13 angle nodes
+800.0,Column-LUT-Interp-4px,interpolated_lut,241,16,3856,0.470703125,per calibration,signed Q3.13 angle nodes
+800.0,Column-LUT-Interp-8px,interpolated_lut,121,16,1936,0.236328125,per calibration,signed Q3.13 angle nodes
+800.0,Column-LUT-Interp-16px,interpolated_lut,61,16,976,0.119140625,per calibration,signed Q3.13 angle nodes
+800.0,Column-LUT-Interp-32px,interpolated_lut,31,16,496,0.060546875,per calibration,signed Q3.13 angle nodes
+800.0,Column-LUT-Interp-64px,interpolated_lut,16,16,256,0.03125,per calibration,signed Q3.13 angle nodes
+800.0,Warp-Grid-T8,warp_grid,11011,48,528528,64.517578125,per pose interval,three signed Q1.15 world-ray components/node
+800.0,Warp-Grid-T16,warp_grid,2806,48,134688,16.44140625,per pose interval,three signed Q1.15 world-ray components/node
+800.0,Warp-Grid-T32,warp_grid,744,48,35712,4.359375,per pose interval,three signed Q1.15 world-ray components/node
+800.0,Warp-Grid-T64,warp_grid,208,48,9984,1.21875,per pose interval,three signed Q1.15 world-ray components/node
+1000.0,Golden,reference,0,0,0,0.0,none,software reference
+1000.0,C0a-Full-Column-LUT,column_lut,960,16,15360,1.875,per calibration,signed Q3.13 angle
+1000.0,C0b-2D-Ray-LUT,2d_ray_lut,691200,48,33177600,4050.0,per calibration,three signed Q1.15 unit-ray components
+1000.0,Global-Linear-float,global_linear,1,32,32,0.00390625,per calibration,one float32 slope; zero intercept by symmetry
+1000.0,Global-Linear-Q2.16,global_linear,1,18,18,0.002197265625,per calibration,one signed Q2.16 slope
+1000.0,PWL-2-float,piecewise_linear,4,32,128,0.015625,per calibration,symmetric; 2 positive-side segments; slope/intercept per segment
+1000.0,PWL-2-Q2.16,piecewise_linear,4,18,72,0.0087890625,per calibration,symmetric; 2 positive-side segments; slope/intercept per segment
+1000.0,PWL-4-float,piecewise_linear,8,32,256,0.03125,per calibration,symmetric; 4 positive-side segments; slope/intercept per segment
+1000.0,PWL-4-Q2.16,piecewise_linear,8,18,144,0.017578125,per calibration,symmetric; 4 positive-side segments; slope/intercept per segment
+1000.0,PWL-8-float,piecewise_linear,16,32,512,0.0625,per calibration,symmetric; 8 positive-side segments; slope/intercept per segment
+1000.0,PWL-8-Q2.16,piecewise_linear,16,18,288,0.03515625,per calibration,symmetric; 8 positive-side segments; slope/intercept per segment
+1000.0,PWL-16-float,piecewise_linear,32,32,1024,0.125,per calibration,symmetric; 16 positive-side segments; slope/intercept per segment
+1000.0,PWL-16-Q2.16,piecewise_linear,32,18,576,0.0703125,per calibration,symmetric; 16 positive-side segments; slope/intercept per segment
+1000.0,Column-LUT-Interp-1px,interpolated_lut,960,16,15360,1.875,per calibration,signed Q3.13 angle nodes
+1000.0,Column-LUT-Interp-2px,interpolated_lut,481,16,7696,0.939453125,per calibration,signed Q3.13 angle nodes
+1000.0,Column-LUT-Interp-4px,interpolated_lut,241,16,3856,0.470703125,per calibration,signed Q3.13 angle nodes
+1000.0,Column-LUT-Interp-8px,interpolated_lut,121,16,1936,0.236328125,per calibration,signed Q3.13 angle nodes
+1000.0,Column-LUT-Interp-16px,interpolated_lut,61,16,976,0.119140625,per calibration,signed Q3.13 angle nodes
+1000.0,Column-LUT-Interp-32px,interpolated_lut,31,16,496,0.060546875,per calibration,signed Q3.13 angle nodes
+1000.0,Column-LUT-Interp-64px,interpolated_lut,16,16,256,0.03125,per calibration,signed Q3.13 angle nodes
+1000.0,Warp-Grid-T8,warp_grid,11011,48,528528,64.517578125,per pose interval,three signed Q1.15 world-ray components/node
+1000.0,Warp-Grid-T16,warp_grid,2806,48,134688,16.44140625,per pose interval,three signed Q1.15 world-ray components/node
+1000.0,Warp-Grid-T32,warp_grid,744,48,35712,4.359375,per pose interval,three signed Q1.15 world-ray components/node
+1000.0,Warp-Grid-T64,warp_grid,208,48,9984,1.21875,per pose interval,three signed Q1.15 world-ray components/node

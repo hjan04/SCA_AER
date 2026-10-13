@@ -1,0 +1,5 @@
+experiment,primary_evidence_status,missing_primary_artifacts,available_secondary_evidence
+Exp01,not recovered,ray-projection vectors; scripts; configs; hashes; selected plots,FINAL_TECHNICAL_AUDIT.md; CLAIMS_AND_EVIDENCE.md
+Exp02,not recovered,PWL/T32/T64 comparison vectors; scripts; configs; hashes; selected plots,FINAL_TECHNICAL_AUDIT.md; CLAIMS_AND_EVIDENCE.md
+Exp03,two Sept22 recordings decoded; original tools recovered and hashed,Sept15 source; original locality/bank analysis outputs; historical full three-recording dataset,REAL_DATA_PROVENANCE.md; real_data_summary/sept22_frame_stats.csv; PEAK_FRAME_RTL.md; peak_sequence/three_frame_sequence.log; FINAL_TECHNICAL_AUDIT.md
+Exp04,not recovered,bank/lane/merge sweep CSVs; scripts; configs; hashes,FINAL_TECHNICAL_AUDIT.md; CLAIMS_AND_EVIDENCE.md
