@@ -1,0 +1,23 @@
+// synth_mode1.f: MODE 1 logic/control PPA. wm_grid_store + wm_world_mem_model replaced by port-exact black-box stubs
+rtl/include/wm_pkg.sv
+rtl/control/wm_ctrl_pkg.sv
+rtl/numeric/wm_lerp.sv
+rtl/numeric/wm_isqrt.sv
+rtl/numeric/wm_cordic_vectoring.sv
+rtl/numeric/wm_ray2angle.sv
+rtl/numeric/wm_world_quant.sv
+rtl/numeric/wm_mapper_lane.sv
+rtl/control/wm_input_fifo.sv
+rtl/control/wm_skid_buffer.sv
+rtl/control/wm_word_unpacker.sv
+rtl/control/wm_lane_dispatch.sv
+rtl/control/wm_frame_ctrl.sv
+rtl/control/wm_reuse_cache.sv
+rtl/control/wm_meta_pipe.sv
+rtl/control/wm_elite_merger.sv
+rtl/control/wm_bank_router.sv
+rtl/control/wm_bank_update_ctrl.sv
+rtl/control/wm_status_counters.sv
+synthesis/stubs/wm_grid_store_bb.sv
+synthesis/stubs/wm_world_mem_model_bb.sv
+rtl/top/wm_world_mapper_top.sv

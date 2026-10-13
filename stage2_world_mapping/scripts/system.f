@@ -1,0 +1,23 @@
+// system.f: full simulation design (incl. behavioural grid store + memory model) -- paths relative to stage2_integration_local/ ; deterministic order: packages, numeric, control, top
+rtl/include/wm_pkg.sv
+rtl/control/wm_ctrl_pkg.sv
+rtl/numeric/wm_lerp.sv
+rtl/numeric/wm_isqrt.sv
+rtl/numeric/wm_cordic_vectoring.sv
+rtl/numeric/wm_ray2angle.sv
+rtl/numeric/wm_world_quant.sv
+rtl/numeric/wm_mapper_lane.sv
+rtl/control/wm_input_fifo.sv
+rtl/control/wm_skid_buffer.sv
+rtl/control/wm_word_unpacker.sv
+rtl/control/wm_lane_dispatch.sv
+rtl/control/wm_frame_ctrl.sv
+rtl/control/wm_reuse_cache.sv
+rtl/control/wm_meta_pipe.sv
+rtl/control/wm_elite_merger.sv
+rtl/control/wm_bank_router.sv
+rtl/control/wm_bank_update_ctrl.sv
+rtl/control/wm_status_counters.sv
+rtl/control/wm_grid_store.sv
+rtl/control/wm_world_mem_model.sv
+rtl/top/wm_world_mapper_top.sv

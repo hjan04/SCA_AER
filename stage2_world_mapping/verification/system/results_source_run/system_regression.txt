@@ -1,0 +1,84 @@
+LINT verilator -Wall: {'Warning-UNUSEDSIGNAL': 27, 'Warning-UNUSEDPARAM': 11, 'Error': 1}
+LINT non-UNUSED warnings/errors: none
+grid_test_image.csv: 744 nodes, mismatches=0
+s01_one_word {'words': 1, 'events': 7, 'dropped': 0, 'elite_records': 3, 'elite_merged': 2, 'd2_records': 7, 'sat_loss': 0, 'issue_cycles': 4, 'frames': 1, 'elite_same_cell_records': 2, 'elite_multi_cell_records': 0}
+s02_one_event {'words': 1, 'events': 1, 'dropped': 0, 'elite_records': 1, 'elite_merged': 0, 'd2_records': 1, 'sat_loss': 0, 'issue_cycles': 1, 'frames': 1, 'elite_same_cell_records': 0, 'elite_multi_cell_records': 0}
+s03_odd_counts {'words': 6, 'events': 40, 'dropped': 0, 'elite_records': 8, 'elite_merged': 6, 'd2_records': 40, 'sat_loss': 0, 'issue_cycles': 23, 'frames': 1, 'elite_same_cell_records': 6, 'elite_multi_cell_records': 1}
+s04_two_lane_dispatch {'words': 208, 'events': 1587, 'dropped': 0, 'elite_records': 400, 'elite_merged': 379, 'd2_records': 1587, 'sat_loss': 0, 'issue_cycles': 842, 'frames': 1, 'elite_same_cell_records': 373, 'elite_multi_cell_records': 71}
+s05_dense_merge_banks {'words': 206, 'events': 1457, 'dropped': 0, 'elite_records': 376, 'elite_merged': 351, 'd2_records': 1457, 'sat_loss': 12, 'issue_cycles': 781, 'frames': 1, 'elite_same_cell_records': 346, 'elite_multi_cell_records': 80}
+s06_saturation_on_off {'words': 6, 'events': 72, 'dropped': 0, 'elite_records': 12, 'elite_merged': 9, 'd2_records': 72, 'sat_loss': 24, 'issue_cycles': 36, 'frames': 1, 'elite_same_cell_records': 9, 'elite_multi_cell_records': 0}
+s07_frame_grid_swap {'words': 352, 'events': 2457, 'dropped': 0, 'elite_records': 616, 'elite_merged': 581, 'd2_records': 2457, 'sat_loss': 24, 'issue_cycles': 1324, 'frames': 5, 'elite_same_cell_records': 573, 'elite_multi_cell_records': 104}
+s08_partial_grid {'words': 168, 'events': 1164, 'dropped': 0, 'elite_records': 287, 'elite_merged': 272, 'd2_records': 1164, 'sat_loss': 6, 'issue_cycles': 622, 'frames': 3, 'elite_same_cell_records': 271, 'elite_multi_cell_records': 58}
+s09_invalid_coords {'words': 4, 'events': 9, 'dropped': 7, 'elite_records': 2, 'elite_merged': 1, 'd2_records': 9, 'sat_loss': 0, 'issue_cycles': 5, 'frames': 1, 'elite_same_cell_records': 1, 'elite_multi_cell_records': 0}
+s10_codex_vectors {'words': 616, 'events': 616, 'dropped': 0, 'elite_records': 616, 'elite_merged': 0, 'd2_records': 616, 'sat_loss': 0, 'issue_cycles': 616, 'frames': 4, 'elite_same_cell_records': 0, 'elite_multi_cell_records': 0}
+s11_real_sept22b {'words': 8742, 'events': 40000, 'dropped': 0, 'elite_records': 17622, 'elite_merged': 8871, 'd2_records': 40000, 'sat_loss': 31348, 'issue_cycles': 21870, 'frames': 2, 'elite_same_cell_records': 8603, 'elite_multi_cell_records': 1067}
+BUILD base: ok
+BUILD lat3: ok
+BUILD fifo8: ok
+BUILD noreuse_lat3: ok
+T01 PASS  one native word  [s01_one_word, build=base ] (0.6s)
+      [E-lite] s01_one_word: events=7 words=1 dropped=0 | records=3 merged=2 (RMW/event 0.429) | cycles=319 stall=0 issue_cyc=4 eff=0.875 | conflicts=0 same_word=0 bypass=1 | fifo_max=1 outbuf_max=1 bq_max=1 | node_reads=1 reuse=6 grid_wait=744 | sat=0
+      [D2] s01_one_word: events=7 words=1 dropped=0 | records=7 merged=0 (RMW/event 1.000) | cycles=320 stall=0 issue_cyc=4 eff=0.875 | conflicts=2 same_word=2 bypass=5 | fifo_max=1 outbuf_max=1 bq_max=3 | node_reads=1 reuse=6 grid_wait=744 | sat=0
+T02 PASS  one event  [s02_one_event, build=base ] (0.6s)
+      [D2] s02_one_event: events=1 words=1 dropped=0 | records=1 merged=0 (RMW/event 1.000) | cycles=315 stall=0 issue_cyc=1 eff=0.500 | conflicts=0 same_word=0 bypass=0 | fifo_max=1 outbuf_max=1 bq_max=1 | node_reads=1 reuse=0 grid_wait=744 | sat=0
+      [E-lite] s02_one_event: events=1 words=1 dropped=0 | records=1 merged=0 (RMW/event 1.000) | cycles=316 stall=0 issue_cyc=1 eff=0.500 | conflicts=0 same_word=0 bypass=0 | fifo_max=1 outbuf_max=1 bq_max=1 | node_reads=1 reuse=0 grid_wait=744 | sat=0
+T03 PASS  odd event counts  [s03_odd_counts, build=base ] (0.6s)
+      [E-lite] s03_odd_counts: events=40 words=6 dropped=0 | records=8 merged=6 (RMW/event 0.200) | cycles=338 stall=0 issue_cyc=23 eff=0.870 | conflicts=0 same_word=0 bypass=2 | fifo_max=6 outbuf_max=1 bq_max=1 | node_reads=6 reuse=34 grid_wait=744 | sat=0
+      [D2] s03_odd_counts: events=40 words=6 dropped=0 | records=40 merged=0 (RMW/event 1.000) | cycles=347 stall=3 issue_cyc=23 eff=0.870 | conflicts=17 same_word=17 bypass=34 | fifo_max=6 outbuf_max=4 bq_max=3 | node_reads=6 reuse=34 grid_wait=744 | sat=0
+T04 PASS  two-lane dispatch / issue cycles  [s04_two_lane_dispatch, build=base ] (1.8s)
+      [E-lite] s04_two_lane_dispatch: events=1587 words=208 dropped=0 | records=400 merged=379 (RMW/event 0.252) | cycles=1157 stall=0 issue_cyc=842 eff=0.942 | conflicts=1 same_word=0 bypass=39 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=373 reuse=1214 grid_wait=744 | sat=0
+      [D2] s04_two_lane_dispatch: events=1587 words=208 dropped=0 | records=1587 merged=0 (RMW/event 1.000) | cycles=1352 stall=191 issue_cyc=842 eff=0.942 | conflicts=665 same_word=657 bypass=1226 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=373 reuse=1214 grid_wait=744 | sat=0
+T05 PASS  mapper CE stall (periodic)  [s04_two_lane_dispatch, build=base +STALL=1] (1.7s)
+      [E-lite] s04_two_lane_dispatch: events=1587 words=208 dropped=0 | records=400 merged=379 (RMW/event 0.252) | cycles=1493 stall=546 issue_cyc=842 eff=0.942 | conflicts=1 same_word=0 bypass=39 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=373 reuse=1214 grid_wait=744 | sat=0
+      [D2] s04_two_lane_dispatch: events=1587 words=208 dropped=0 | records=1587 merged=0 (RMW/event 1.000) | cycles=1499 stall=552 issue_cyc=842 eff=0.942 | conflicts=665 same_word=657 bypass=1226 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=373 reuse=1214 grid_wait=744 | sat=0
+T06 PASS  metadata alignment under random CE  [s05_dense_merge_banks, build=base +STALL=2 +GAP=1] (1.7s)
+      [E-lite] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=376 merged=351 (RMW/event 0.258) | cycles=3030 stall=2477 issue_cyc=781 eff=0.933 | conflicts=1 same_word=0 bypass=166 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [D2] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=1457 merged=0 (RMW/event 1.000) | cycles=3110 stall=2581 issue_cyc=781 eff=0.933 | conflicts=622 same_word=619 bypass=1247 | fifo_max=128 outbuf_max=1 bq_max=3 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+T07 PASS  same-cell merge  [s06_saturation_on_off, build=base ] (2.7s)
+      [E-lite] s06_saturation_on_off: events=72 words=6 dropped=0 | records=12 merged=9 (RMW/event 0.167) | cycles=351 stall=0 issue_cyc=36 eff=1.000 | conflicts=0 same_word=0 bypass=9 | fifo_max=6 outbuf_max=1 bq_max=1 | node_reads=2 reuse=70 grid_wait=744 | sat=24
+      [D2] s06_saturation_on_off: events=72 words=6 dropped=0 | records=72 merged=0 (RMW/event 1.000) | cycles=381 stall=23 issue_cyc=36 eff=1.000 | conflicts=33 same_word=33 bypass=69 | fifo_max=6 outbuf_max=4 bq_max=3 | node_reads=2 reuse=70 grid_wait=744 | sat=24
+T08 PASS  same-word / different-cell merge  [s05_dense_merge_banks, build=base ] (1.8s)
+      [E-lite] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=376 merged=351 (RMW/event 0.258) | cycles=1096 stall=0 issue_cyc=781 eff=0.933 | conflicts=1 same_word=0 bypass=166 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [D2] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=1457 merged=0 (RMW/event 1.000) | cycles=1299 stall=200 issue_cyc=781 eff=0.933 | conflicts=622 same_word=619 bypass=1247 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+T09 PASS  different-bank parallel updates  [s11_real_sept22b, build=base ] (35.8s)
+      [E-lite] s11_real_sept22b: events=40000 words=8742 dropped=0 | records=17622 merged=8871 (RMW/event 0.441) | cycles=22245 stall=56 issue_cyc=21870 eff=0.914 | conflicts=3207 same_word=3151 bypass=14431 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=7570 reuse=32430 grid_wait=744 | sat=31348
+      [D2] s11_real_sept22b: events=40000 words=8742 dropped=0 | records=40000 merged=0 (RMW/event 1.000) | cycles=33565 stall=11373 issue_cyc=21870 eff=0.914 | conflicts=16957 same_word=16952 bypass=36809 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=7570 reuse=32430 grid_wait=744 | sat=31348
+T10 PASS  same-bank conflict + bank hold  [s05_dense_merge_banks, build=base +HOLD=1] (2.0s)
+      [E-lite] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=376 merged=351 (RMW/event 0.258) | cycles=1096 stall=0 issue_cyc=781 eff=0.933 | conflicts=1 same_word=0 bypass=166 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [D2] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=1457 merged=0 (RMW/event 1.000) | cycles=1440 stall=339 issue_cyc=781 eff=0.933 | conflicts=622 same_word=619 bypass=1247 | fifo_max=128 outbuf_max=4 bq_max=4 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+T11 PASS  RAW bypass, RD_LAT=3, bank hold  [s05_dense_merge_banks, build=lat3 +HOLD=1 +STALL=1] (1.9s)
+      [E-lite] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=376 merged=351 (RMW/event 0.258) | cycles=1413 stall=525 issue_cyc=781 eff=0.933 | conflicts=1 same_word=0 bypass=287 | fifo_max=128 outbuf_max=1 bq_max=3 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [D2] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=1457 merged=0 (RMW/event 1.000) | cycles=1534 stall=644 issue_cyc=781 eff=0.933 | conflicts=622 same_word=619 bypass=1268 | fifo_max=128 outbuf_max=4 bq_max=4 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+T12 PASS  ON saturation  [s06_saturation_on_off, build=base ] (0.6s)
+      [E-lite] s06_saturation_on_off: events=72 words=6 dropped=0 | records=12 merged=9 (RMW/event 0.167) | cycles=351 stall=0 issue_cyc=36 eff=1.000 | conflicts=0 same_word=0 bypass=9 | fifo_max=6 outbuf_max=1 bq_max=1 | node_reads=2 reuse=70 grid_wait=744 | sat=24
+      [D2] s06_saturation_on_off: events=72 words=6 dropped=0 | records=72 merged=0 (RMW/event 1.000) | cycles=381 stall=23 issue_cyc=36 eff=1.000 | conflicts=33 same_word=33 bypass=69 | fifo_max=6 outbuf_max=4 bq_max=3 | node_reads=2 reuse=70 grid_wait=744 | sat=24
+T13 PASS  OFF saturation, RD_LAT=3  [s06_saturation_on_off, build=lat3 +HOLD=1] (0.8s)
+      [E-lite] s06_saturation_on_off: events=72 words=6 dropped=0 | records=12 merged=9 (RMW/event 0.167) | cycles=353 stall=0 issue_cyc=36 eff=1.000 | conflicts=0 same_word=0 bypass=9 | fifo_max=6 outbuf_max=1 bq_max=1 | node_reads=2 reuse=70 grid_wait=744 | sat=24
+      [D2] s06_saturation_on_off: events=72 words=6 dropped=0 | records=72 merged=0 (RMW/event 1.000) | cycles=399 stall=37 issue_cyc=36 eff=1.000 | conflicts=33 same_word=33 bypass=69 | fifo_max=6 outbuf_max=4 bq_max=4 | node_reads=2 reuse=70 grid_wait=744 | sat=24
+T14 PASS  FIFO backpressure (depth 8, heavy stall)  [s05_dense_merge_banks, build=fifo8 +STALL=3 +HOLD=1] (2.5s)
+      [D2] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=1457 merged=0 (RMW/event 1.000) | cycles=6399 stall=5977 issue_cyc=781 eff=0.933 | conflicts=622 same_word=619 bypass=1247 | fifo_max=8 outbuf_max=1 bq_max=4 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [E-lite] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=376 merged=351 (RMW/event 0.258) | cycles=6688 stall=6266 issue_cyc=781 eff=0.933 | conflicts=1 same_word=0 bypass=166 | fifo_max=8 outbuf_max=1 bq_max=2 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+T15 PASS  frame/grid swap (5 frames)  [s07_frame_grid_swap, build=base +STALL=2] (2.5s)
+      [E-lite] s07_frame_grid_swap: events=2457 words=352 dropped=0 | records=616 merged=581 (RMW/event 0.251) | cycles=4889 stall=3804 issue_cyc=1324 eff=0.928 | conflicts=5 same_word=2 bypass=262 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=547 reuse=1910 grid_wait=744 | sat=24
+      [D2] s07_frame_grid_swap: events=2457 words=352 dropped=0 | records=2457 merged=0 (RMW/event 1.000) | cycles=4935 stall=3852 issue_cyc=1324 eff=0.928 | conflicts=1040 same_word=1034 bypass=2103 | fifo_max=128 outbuf_max=2 bq_max=3 | node_reads=547 reuse=1910 grid_wait=744 | sat=24
+T16 PASS  partial-grid protection  [s08_partial_grid, build=base ] (2.3s)
+      [E-lite] s08_partial_grid: events=1164 words=168 dropped=0 | records=287 merged=272 (RMW/event 0.247) | cycles=2909 stall=0 issue_cyc=622 eff=0.936 | conflicts=2 same_word=2 bypass=121 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=253 reuse=911 grid_wait=2712 | sat=6
+      [D2] s08_partial_grid: events=1164 words=168 dropped=0 | records=1164 merged=0 (RMW/event 1.000) | cycles=2946 stall=135 issue_cyc=622 eff=0.936 | conflicts=495 same_word=490 bypass=998 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=253 reuse=911 grid_wait=2646 | sat=6
+T17 PASS  world-memory clear (512 cycles)  [s05_dense_merge_banks, build=base +CLEAR=1] (1.9s)
+      [E-lite] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=376 merged=351 (RMW/event 0.258) | cycles=1096 stall=0 issue_cyc=781 eff=0.933 | conflicts=1 same_word=0 bypass=166 | fifo_max=128 outbuf_max=1 bq_max=2 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [D2] s05_dense_merge_banks: events=1457 words=206 dropped=0 | records=1457 merged=0 (RMW/event 1.000) | cycles=1299 stall=200 issue_cyc=781 eff=0.933 | conflicts=622 same_word=619 bypass=1247 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=323 reuse=1134 grid_wait=744 | sat=12
+      [E-lite] clear sweep: 512 cycles, all 2048 words zero
+      [D2] clear sweep: 512 cycles, all 2048 words zero
+T18 PASS  invalid coordinates dropped+counted  [s09_invalid_coords, build=base ] (0.6s)
+      [E-lite] s09_invalid_coords: events=9 words=4 dropped=7 | records=2 merged=1 (RMW/event 0.222) | cycles=322 stall=0 issue_cyc=5 eff=0.900 | conflicts=0 same_word=0 bypass=0 | fifo_max=4 outbuf_max=1 bq_max=1 | node_reads=2 reuse=7 grid_wait=744 | sat=0
+      [D2] s09_invalid_coords: events=9 words=4 dropped=7 | records=9 merged=0 (RMW/event 1.000) | cycles=322 stall=0 issue_cyc=5 eff=0.900 | conflicts=4 same_word=4 bypass=7 | fifo_max=4 outbuf_max=1 bq_max=3 | node_reads=2 reuse=7 grid_wait=744 | sat=0
+T19 PASS  Codex numeric vectors via top  [s10_codex_vectors, build=base +STALL=1] (1.9s)
+      [D2] s10_codex_vectors: events=616 words=616 dropped=0 | records=616 merged=0 (RMW/event 1.000) | cycles=2780 stall=897 issue_cyc=616 eff=0.500 | conflicts=0 same_word=0 bypass=30 | fifo_max=128 outbuf_max=1 bq_max=1 | node_reads=615 reuse=1 grid_wait=2339 | sat=0
+      [E-lite] s10_codex_vectors: events=616 words=616 dropped=0 | records=616 merged=0 (RMW/event 1.000) | cycles=2781 stall=897 issue_cyc=616 eff=0.500 | conflicts=0 same_word=0 bypass=30 | fifo_max=128 outbuf_max=1 bq_max=1 | node_reads=615 reuse=1 grid_wait=2339 | sat=0
+T20 PASS  real traffic subset (Sept22b)  [s11_real_sept22b, build=base +STALL=2 +HOLD=1] (45.1s)
+      [E-lite] s11_real_sept22b: events=40000 words=8742 dropped=0 | records=17622 merged=8871 (RMW/event 0.441) | cycles=73698 stall=52061 issue_cyc=21870 eff=0.914 | conflicts=3207 same_word=3151 bypass=14431 | fifo_max=128 outbuf_max=3 bq_max=4 | node_reads=7570 reuse=32430 grid_wait=744 | sat=31348
+      [D2] s11_real_sept22b: events=40000 words=8742 dropped=0 | records=40000 merged=0 (RMW/event 1.000) | cycles=73764 stall=52137 issue_cyc=21870 eff=0.914 | conflicts=16957 same_word=16952 bypass=36809 | fifo_max=128 outbuf_max=4 bq_max=4 | node_reads=7570 reuse=32430 grid_wait=744 | sat=31348
+T21 PASS  real traffic subset, no reuse, RD_LAT=3  [s11_real_sept22b, build=noreuse_lat3 ] (39.7s)
+      [E-lite] s11_real_sept22b: events=40000 words=8742 dropped=0 | records=17622 merged=8871 (RMW/event 0.441) | cycles=22247 stall=56 issue_cyc=21870 eff=0.914 | conflicts=3207 same_word=3151 bypass=14799 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=40000 reuse=0 grid_wait=744 | sat=31348
+      [D2] s11_real_sept22b: events=40000 words=8742 dropped=0 | records=40000 merged=0 (RMW/event 1.000) | cycles=33567 stall=11373 issue_cyc=21870 eff=0.914 | conflicts=16957 same_word=16952 bypass=37059 | fifo_max=128 outbuf_max=4 bq_max=3 | node_reads=40000 reuse=0 grid_wait=744 | sat=31348
+SYSTEM REGRESSION: 21/21 passed

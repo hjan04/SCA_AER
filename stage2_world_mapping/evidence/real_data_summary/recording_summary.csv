@@ -1,0 +1,3 @@
+recording,frame_ids,nonempty_frames,pixel_events_all_frames,native_event_words_all_frames,timed_frame_intervals,timed_events,timed_duration_us,median_frame_interval_us,average_timed_events_per_s,max_frame_event_rate_per_s
+2026-09-22-16-42-32-DELTA.dvs,2063,2057,75340608,22980715,2055,75329078,1589102,773,47403551.18802947,104347994.82535575
+2026-09-22-16-42-44-DELTA.dvs,2054,2053,88075183,25878861,2051,88074998,1588329,773,55451356.740322694,110069767.44186047

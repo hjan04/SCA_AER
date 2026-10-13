@@ -1,0 +1,11 @@
+# Final Stage 2 evidence limitations
+
+- Full raw data was recovered only for the two Sept 22 recordings. The Sept 15 recording remains unavailable, so the reported maximum is among the two recovered Sept 22 files, not across all three historical recordings.
+- The DVS stream preserves sensor readout order but does not provide trustworthy per-event physical timestamps. Measured frame intervals are available; within-frame word arrival is modeled uniformly. Unknown physical microbursts are not covered.
+- Frame 513 contains the largest count (125,806) but spans 3,093 us. The historical ~163 M/s figure comes from scaling that count by the 773 us median frame period; the largest rate using the individual recorded interval is 110.070 M/s at frame 790.
+- Frame and sequence RTL runs use a synthetic/identity architectural grid. There is no trusted pose ground truth; the tests do not establish real-world geometric accuracy. Inferred roll is not pose ground truth.
+- FIFO depth 16 was the smallest tested depth that sustained the stated uniform arrival model. FIFO depth 128 remains the configurable V1 engineering default; no result proves sufficiency for unknown microbursts.
+- `CNT_W=4` is a configurable V1 engineering default, not an optimized counter representation. Saturation was 66.70% for the rate-peak frame, 76.13% for the event-count-peak frame, 86.16% across the three-frame sequence, and 78.37% in the existing 40k subset.
+- Activity-based power remains unresolved because RTL-to-gate switching annotation coverage was insufficient. Accepted power evidence is vectorless pre-layout logic power only: D2 33.3356 mW, E-lite 36.8067 mW. Do not calculate energy/event from these values.
+- MODE1 black-boxes the 71,424-bit grid and 262,144-bit world memories. Reported power excludes internal memory power and a real post-CTS clock tree. Reduced RMW traffic indicates lower world-memory access demand, not measured memory-power reduction.
+- Expanded Golden-bin comparisons have 124 CORDIC mismatches and 24 direct-bin mismatches among 44,291 rays, maximum one-bin displacement each. Direct-bin was not integrated and had higher standalone vectorless power. CORDIC remains the frozen baseline because it is integrated, verified, and meets 100 MHz.

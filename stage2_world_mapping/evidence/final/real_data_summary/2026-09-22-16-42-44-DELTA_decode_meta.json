@@ -1,0 +1,11 @@
+{
+  "n_words": 27819565,
+  "n_event_words": 25878861,
+  "n_column_words": 1934482,
+  "n_time_words": 4162,
+  "n_frame_end": 2053,
+  "n_header_words": 7,
+  "n_ch1_words": 7,
+  "col_flag_set": 0,
+  "dropped_out_of_range_groups": 0
+}

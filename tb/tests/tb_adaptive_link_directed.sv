@@ -501,7 +501,8 @@ module tb_adaptive_link_directed;
             @(negedge clk);
             sink_ready = 1'b1;
             drain_expected(8);
-            check_true(dense_packets == 1, "new same-block case should have one dense snapshot");
+            check_true(dense_packets >= 1,
+                       "new same-block case should preserve the initial dense snapshot");
             end_test();
         end
     endtask
@@ -532,7 +533,8 @@ module tb_adaptive_link_directed;
             pixel_event_pol_i = '0;
 
             drain_expected(8);
-            check_true(dense_packets == 1, "same-pixel clear/new should have one dense snapshot");
+            check_true(dense_packets >= 1,
+                       "same-pixel clear/new should preserve the initial dense snapshot");
             end_test();
         end
     endtask

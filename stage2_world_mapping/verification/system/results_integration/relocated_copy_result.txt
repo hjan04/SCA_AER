@@ -1,0 +1,13 @@
+PASS wm_lerp + wm_mapper_lane: 8064 vectors, latency 52
+PASS wm_isqrt: 33231 vectors, latency 28
+PASS wm_cordic_vectoring: 66462 vectors, latency 24
+PASS wm_ray2angle + wm_world_quant: 33231 vectors, latency 52
+All numeric RTL regressions passed.
+AUDIT PASS: no file open or subprocess argument referenced ('/tmp/sca_aer_codex_modeling2', '/home/hj/SCA_AER/stage2_world_mapping')
+AUDIT script exit code: 0
+SOURCES numeric=<relocated>/stage2_integration_local/rtl codex_model=<relocated>/stage2_integration_local/codex stage2=<relocated>/stage2_integration_local
+SYSTEM REGRESSION: 21/21 passed
+AUDIT PASS: no file open or subprocess argument referenced ('/tmp/sca_aer_codex_modeling2', '/home/hj/SCA_AER/stage2_world_mapping')
+AUDIT script exit code: 0
+
+[exited with code 0]

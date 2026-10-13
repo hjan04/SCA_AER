@@ -1,0 +1,4 @@
+dataset,file,words,event_words,column_words,frame_end_words,frames_with_events,pixel_events,duration_s,frame_period_us_median,frame_period_us_p1,frame_period_us_p99,fps_est,pixels_per_event_word,column_words_per_frame_mean,bytes_per_pixel_event,dropped_out_of_range,untimed_partial_frames,untimed_events,isolated_event_frac
+sept15_yaw,sept15_yaw.npz,27112057,25153472,1952385,2061,2060,86778742,1.5922,773,773,774,1293.7,3.45,946.8,1.25,3,1,39,0.244241
+sept22a_1642_32,sept22a_1642_32.npz,24849727,22980716,1862822,2062,2057,75340608,1.5899,773,773,774,1293.7,3.278,903,1.319,1,1,810,0.261973
+sept22b_1642_44,sept22b_1642_44.npz,27819484,25878861,1934455,2053,2053,88075183,1.5891,773,773,774,1293.7,3.403,941.8,1.263,0,1,137,0.245295

@@ -1,0 +1,5 @@
+recording,validation_window,decoded_events,frame_min,frame_max,native_event_words,column_words,time_words,frame_end_words,header_words,channel1_words,column_flag_words_set,out_of_range_events,x_min,x_max,y_min,y_max,p0_events,p1_events,result
+2026-09-22-16-42-32-DELTA.dvs,first_2000000_words,4717236,0,420,1707481,291254,838,420,7,7,0,1,0,959,0,719,2405546,2311690,valid
+2026-09-22-16-42-44-DELTA.dvs,first_2000000_words,4921014,0,309,1733891,265175,618,309,7,7,0,0,0,959,0,719,2510471,2410543,valid
+2026-09-22-16-42-32-DELTA.dvs,first_2000000_words_chunk_equivalence,4717236,,,,,,,,,,,,,,,,,exact match across chunk boundaries for frame/timestamp/x/y/polarity/word/slot
+2026-09-22-16-42-44-DELTA.dvs,existing_frames_900_901_archive_crosscheck,139575,,,,,,,,,,,,,,,,,frames900/901 event counts native words polarity and coordinate ranges match compact NPZ exactly

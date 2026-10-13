@@ -1,0 +1,4 @@
+dataset,frac_p1,frac_p0,frac_4x4_blocks_mixed,frac_events_in_mixed_4x4,same_pixel_opposite_pol_same_frame,pixel_refire_next_frame_same_pol,pixel_refire_next_frame_opp_pol,note
+sept15_yaw,0.520039,0.479961,0.0945079,0.169497,5.76178e-08,0.0740762,0.013312,next-frame refire undercounted at chunk edges (1 of 104 transitions)
+sept22a_1642_32,0.500892,0.499108,0.0514043,0.0801103,9.29114e-08,0.0741483,0.00637521,next-frame refire undercounted at chunk edges (1 of 104 transitions)
+sept22b_1642_44,0.512643,0.487357,0.0482115,0.0732951,3.31648e-05,0.0801489,0.00722954,next-frame refire undercounted at chunk edges (1 of 104 transitions)

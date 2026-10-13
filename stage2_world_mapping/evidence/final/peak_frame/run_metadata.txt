@@ -1,0 +1,11 @@
+Measurement-only Xcelium 23.09 commands used:
+
+Full-speed frame 790:
+xrun -64bit -sv -f scripts/system.f final_evidence/tb_single_dut.sv -top tb_single_dut -define MERGE_EN=1 -define FIFO_DEPTH=128 -access +rwc +DIR=final_evidence/peak_frame/recovered_peak_rate +MODE=full +CHECK_GOLDEN=0
+
+Full-speed frame 513:
+xrun -64bit -sv -f scripts/system.f final_evidence/tb_single_dut.sv -top tb_single_dut -define MERGE_EN=1 -define FIFO_DEPTH=128 -access +rwc +DIR=final_evidence/peak_frame/recovered_peak_count +MODE=full +CHECK_GOLDEN=0
+
+Uniform interval sweep for frame 790 used the same command with FIFO_DEPTH=16/32/64/128/256, MODE=paced, FRAME_CYCLES=77400.
+The continuous three-frame run used FIFO_DEPTH=128, DIR=final_evidence/peak_sequence/rtl_vectors, MODE=sequence.
+Clock is the testbench 10 ns period (100 MHz). One identity grid is loaded before each run. No synthesis or power analysis was run.

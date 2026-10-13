@@ -1,0 +1,8 @@
+source=/home/aiasic26913/SCA_AER_STAGE2/stage2_integration_local/reference/real_traffic/sept22b_f900_f901.npz
+sha256=028dd243ea723b051be4c4d9c2167396b997b265d9001fa83456f8c28637c68c
+frame=901
+event_count=70115
+native_words=18690
+pose_convention=synthetic yaw=5deg, pitch=0deg, roll=3deg; matches existing system-test frame-901 convention; not real pose ground truth
+ordering=stable source order; native words grouped by recorded word id; group A then group B slots retained; polarity preserved
+rtl_epoch=0 for this one-frame scenario; recorded source frame identifier 901 was used to select the source events, then mapped to scenario epoch 0 for the loaded synthetic grid

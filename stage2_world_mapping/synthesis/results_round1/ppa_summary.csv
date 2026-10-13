@@ -1,0 +1,3 @@
+config,mode,period_ns,target_MHz,cell_area,net_area,total_area,leaf_instances,sequential_instances,combinational_instances,worst_slack_ps,tns_ps,violating_paths,critical_startpoint,critical_endpoint,critical_data_path_ps,vectorless_power_mW
+D2,MODE1,10.0,100,472094.406,174891.068,646985.474,139426,23313,116113,-2141.9,-132438.9,92,u_reuse/l1_n10_reg[x][11]/CK,u_lane1/u_ray2angle/u_isqrt/rem_pipe_reg[0][0]/D,11795,36.4060
+E-lite,MODE1,10.0,100,517957.974,190361.452,708319.426,151222,26799,124423,-2145.8,-126057.3,92,u_reuse/l1_n10_reg[z][4]/CK,u_lane1/u_ray2angle/u_isqrt/root_pipe_reg[0][0]/D,11810,39.5705

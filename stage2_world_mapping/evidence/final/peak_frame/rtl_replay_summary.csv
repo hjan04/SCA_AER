@@ -1,0 +1,4 @@
+scenario,merge_en,fifo_depth,mode,events,native_words,status_cycles,post_grid_cycles,drain_tail_cycles,events_per_cycle,events_per_s,issue_cycles,issue_efficiency,fifo_max,mapper_ce_stalls,bank_conflicts,records,merges,rmw_done,rmw_per_event,dropped_events,saturated_contributions,saturation_rate,errors,log
+full_speed_rate_peak,1,128,full,85194,20386,47527,47283,0,1.801789,180178922.657,47045,0.905452,128,172,7687,41102,20267,41102,0.482452,0,56823,0.666984,0,peak_frame/run_logs/recovered_full_depth128.log
+full_speed_count_peak,1,128,full,125806,32295,70398,70154,0,1.793283,179328334.806,69798,0.901215,128,290,12603,65033,30318,65033,0.516931,0,95773,0.761275,0,peak_frame/run_logs/recovered_full_count_depth128.log
+uniform_arrival_rate_peak,1,128,paced,85194,20386,77707,77463,63,1.099802,109980248.635,47045,0.905452,7,0,7687,41102,20267,41102,0.482452,0,56823,0.666984,0,peak_frame/run_logs/recovered_paced_depth128.log

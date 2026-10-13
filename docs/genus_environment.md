@@ -1,5 +1,7 @@
 # Cadence Genus Environment Discovery
 
+> Historical Stage 5A environment survey before the Cadence environment was recovered. Final Stage 1/Stage 2 Genus scripts and compact reports are now present in the repository; see `docs/stage1_model2_evidence.md` and `stage2_world_mapping/synthesis/`.
+
 Stage: 5A
 
 Branch created for this work: `stage5-genus-ppa`

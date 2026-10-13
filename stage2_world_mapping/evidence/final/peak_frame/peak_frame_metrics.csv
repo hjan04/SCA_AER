@@ -1,0 +1,3 @@
+mode,events,native_words,frame_interval_us,cycles_from_grid_ready,events_per_cycle,events_per_second_at_100MHz,issue_efficiency,fifo_max,mapper_ce_stalls,bank_conflicts,merges,rmw_requests,dropped,saturation_contributions,backlog_events_at_boundary,drain_cycles_after_boundary,conservation,result
+full_speed,70115,18690,773,39224,1.787554,178755353.865,0.899510,128,184,7463,16559,37499,0,42923,,,PASS,PASS
+uniform_frame_arrivals_fifo128,70115,18690,773,77364,0.906300,90630008.790,0.899510,3,0,7463,16559,37499,0,42923,63,64,PASS,PASS

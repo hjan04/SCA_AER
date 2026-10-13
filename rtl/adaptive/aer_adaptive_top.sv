@@ -17,7 +17,9 @@ module aer_adaptive_top #(
     parameter int BLOCK_Y_W = (BLOCK_Y_COUNT <= 1) ? 1 : $clog2(BLOCK_Y_COUNT),
     parameter int BLOCK_INDEX_W = (N_BLOCKS <= 1) ? 1 : $clog2(N_BLOCKS),
     parameter int OCC_W = (BLOCK_PIXELS <= 1) ? 1 : $clog2(BLOCK_PIXELS + 1),
-    parameter int DENSE_ENTER_THRESHOLD = 5,
+    parameter int DENSE_ENTER_THRESHOLD = 3,
+    parameter int DENSE_EXIT_THRESHOLD = 1,
+    parameter int HOLD_CYCLES = 4,
 
     parameter int SPARSE_PACKET_W = 1 + X_W + Y_W + 1,
     parameter int DENSE_PACKET_W = 1 + BLOCK_X_W + BLOCK_Y_W +
@@ -63,6 +65,9 @@ module aer_adaptive_top #(
     y_t                        row_base_q;
 
     logic [N_BLOCKS-1:0]       dense_req;
+    logic [N_BLOCKS-1:0]       dense_active_req;
+    logic [N_BLOCKS-1:0]       dense_hold_req;
+    logic [N_BLOCKS-1:0]       dense_select_req;
     logic [N_BLOCKS*OCC_W-1:0] block_occupancy;
     logic                      dense_grant_valid;
     logic [BLOCK_INDEX_W-1:0]  dense_grant_index;
@@ -79,6 +84,7 @@ module aer_adaptive_top #(
     logic [PACKET_W-1:0]       selected_packet;
     logic [N_PIXELS-1:0]       selected_clear_mask;
     logic                      selected_packet_is_dense;
+    logic                      dense_mode;
     logic                      output_accept;
     logic                      output_busy;
 
@@ -187,12 +193,20 @@ module aer_adaptive_top #(
         .N_BLOCKS(N_BLOCKS),
         .N_PIXELS(N_PIXELS),
         .OCC_W(OCC_W),
-        .DENSE_ENTER_THRESHOLD(DENSE_ENTER_THRESHOLD)
+        .DENSE_ENTER_THRESHOLD(DENSE_ENTER_THRESHOLD),
+        .DENSE_EXIT_THRESHOLD(DENSE_EXIT_THRESHOLD)
     ) u_block_occupancy (
         .pending_i(pending),
         .dense_req_o(dense_req),
+        .dense_active_req_o(dense_active_req),
+        .dense_hold_req_o(dense_hold_req),
         .block_occupancy_o(block_occupancy)
     );
+
+    // Once dense mode has been entered, retain dense packetization for any
+    // non-empty block until the low-threshold debounce expires.
+    assign dense_select_req = (dense_mode || (|dense_req)) ?
+                              dense_active_req : dense_req;
 
     aer_dense_block_selector #(
         .BLOCK_X_COUNT(BLOCK_X_COUNT),
@@ -202,7 +216,7 @@ module aer_adaptive_top #(
         .BLOCK_X_W(BLOCK_X_W),
         .BLOCK_Y_W(BLOCK_Y_W)
     ) u_dense_selector (
-        .dense_req_i(dense_req),
+        .dense_req_i(dense_select_req),
         .block_base_i(block_base_q),
         .grant_valid_o(dense_grant_valid),
         .grant_block_index_o(dense_grant_index),
@@ -236,8 +250,13 @@ module aer_adaptive_top #(
 
     aer_mode_controller #(
         .PACKET_W(PACKET_W),
-        .CLEAR_W(N_PIXELS)
+        .CLEAR_W(N_PIXELS),
+        .HOLD_CYCLES(HOLD_CYCLES)
     ) u_mode_controller (
+        .clk(clk),
+        .rst_n(rst_n),
+        .dense_enter_i(|dense_req),
+        .dense_hold_i(|dense_hold_req),
         .dense_valid_i(dense_grant_valid),
         .dense_packet_i(dense_packet),
         .dense_clear_mask_i(dense_clear_mask),
@@ -247,7 +266,8 @@ module aer_adaptive_top #(
         .packet_valid_o(selected_packet_valid),
         .packet_payload_o(selected_packet),
         .packet_clear_mask_o(selected_clear_mask),
-        .packet_is_dense_o(selected_packet_is_dense)
+        .packet_is_dense_o(selected_packet_is_dense),
+        .dense_mode_o(dense_mode)
     );
 
     aer_output_handshake #(
@@ -282,7 +302,7 @@ module aer_adaptive_top #(
         end
     end
 
-    assign dense_eligible_o = dense_grant_valid;
+    assign dense_eligible_o = |dense_req;
     assign busy_o = output_busy || (|pending);
 
 endmodule

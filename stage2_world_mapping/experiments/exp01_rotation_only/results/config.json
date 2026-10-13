@@ -1,0 +1,50 @@
+{
+  "experiment": "Experiment 01 - rotation only",
+  "classification": {
+    "competition_discussion_facts": {
+      "sensor_resolution": "960x720",
+      "focal_length_mentioned_mm": 6
+    },
+    "assumptions": {
+      "rotation_known": true,
+      "pitch_deg": 0,
+      "roll_deg": 0,
+      "translation": 0,
+      "camera_y_axis_follows_positive_image_v": true,
+      "euler_convention": "R = Rz(roll) * Ry(yaw) * Rx(pitch)"
+    },
+    "synthetic_parameters": {
+      "fx_px": 800.0,
+      "fy_px": 800.0,
+      "principal_point": [
+        480.0,
+        360.0
+      ],
+      "world_map": [
+        256,
+        128
+      ],
+      "target_feature_deg": [
+        30,
+        0
+      ],
+      "yaw_primary_deg": [
+        0,
+        40
+      ],
+      "yaw_metric_sweep_deg": [
+        -40,
+        40
+      ],
+      "seed": 20261006,
+      "pixel_sampling": "round projected subpixel coordinate to nearest integer"
+    }
+  },
+  "intrinsics_note": "fx/fy are configurable synthetic values; 6 mm was not converted to pixels",
+  "models": {
+    "G": "floating point full Euler geometric reference",
+    "L": "column angle LUT plus yaw; geometric vertical coordinate",
+    "A": "center-slope horizontal linear approximation plus yaw; geometric vertical coordinate"
+  },
+  "synthetic_ground_truth": "known stationary world directions generated and projected by this script; not competition ground truth"
+}
