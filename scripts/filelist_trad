@@ -1,0 +1,3 @@
+../rtl/aer_tx_traditional.v
+../rtl/aer_rx_traditional.v
+../tb/aer_traditional_tb.sv
